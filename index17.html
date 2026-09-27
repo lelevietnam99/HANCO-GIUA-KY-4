@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ôn Tập Hán Cổ - Trang 17: Ngư Ông, Con Trâu & Hai Bà Trưng (Đoạn 11 - 16)</title>
+    <style>
+        :root {
+            --bg-color: #0B0D1B;
+            --card-bg: rgba(20, 24, 48, 0.9);
+            --card-border: rgba(120, 140, 255, 0.3);
+            --accent-glow: #7B61FF;
+            --neon-blue: #00F0FF;
+            --neon-green: #10B981;
+            --neon-gold: #F59E0B;
+            --text-main: #E2E8F0;
+            --text-sub: #94A3B8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: radial-gradient(ellipse at bottom, #111827 0%, #050714 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Background Vũ Trụ */
+        .stars {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background: 
+                radial-gradient(2px 2px at 35px 45px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 80px 110px, #7B61FF, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 130px 60px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 200px 160px, #00F0FF, rgba(0,0,0,0));
+            background-size: 250px 250px;
+            opacity: 0.7;
+        }
+
+        .container {
+            max-width: 950px;
+            width: 100%;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 22px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(123, 97, 255, 0.2);
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            color: #FFF;
+            text-shadow: 0 0 12px var(--accent-glow);
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: var(--neon-blue);
+            font-size: 0.95rem;
+        }
+
+        /* Switch Tabs */
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--accent-glow);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px var(--accent-glow);
+            color: #FFF;
+        }
+
+        /* Study Cards */
+        .text-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: 0.2s;
+        }
+
+        .text-card:hover {
+            border-color: var(--neon-blue);
+        }
+
+        .hanzi-text {
+            font-size: 1.6rem;
+            color: #FFF;
+            margin-bottom: 10px;
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 8px rgba(255,255,255,0.3);
+        }
+
+        .pinyin-text {
+            font-size: 1.1rem;
+            color: var(--neon-gold);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .translation-text {
+            font-size: 1.05rem;
+            color: var(--neon-blue);
+            line-height: 1.5;
+            background: rgba(10, 14, 30, 0.6);
+            padding: 14px 16px;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-glow);
+        }
+
+        /* Interactive Practice Cards */
+        .practice-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hidden-answer {
+            filter: blur(6px);
+            user-select: none;
+            cursor: pointer;
+            transition: 0.3s;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 12px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-top: 8px;
+            color: var(--neon-blue);
+        }
+
+        .hidden-answer.revealed {
+            filter: blur(0);
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid var(--neon-green);
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: var(--text-sub);
+            font-size: 0.85rem;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+
+    <div class="container">
+        <header>
+            <h1>HÁN CỔ - ÔN TẬP GIỮA KỲ IV</h1>
+            <p>Trang 17: Phiên Âm & Dịch Nghĩa (Đoạn 11 - 16: Ngư Ông, Con Trâu & Hai Bà Trưng)</p>
+        </header>
+
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchSection('study')">📚 Phần 1: Tự Học & Dịch Nghĩa</button>
+            <button class="tab-btn" onclick="switchSection('practice')">✍️ Phần 2: Thực Hành Tự Dịch</button>
+        </div>
+
+        <!-- PHẦN 1: TỰ HỌC & DỊCH NGHĨA -->
+        <div id="studySection">
+            <!-- Đoạn 11 -->
+            <div class="text-card">
+                <div style="color: var(--neon-gold); font-weight: bold; margin-bottom: 6px;">Đoạn 11: Cảnh hai ông chài</div>
+                <div class="hanzi-text">11. 雨將晴，河水清。兩漁翁，同坐岸上，張網捕魚。</div>
+                <div class="pinyin-text">Phiên âm: Vũ tương tình, hà thủy thanh. Lưỡng ngư ông, đồng tọa ngạn thượng, trương võng bộ ngư.</div>
+                <div class="translation-text">
+                    <b>Dịch nghĩa:</b> Mưa sắp tạnh, nước sông trong. Hai ông chài, cùng ngồi trên bờ sông, giăng lưới bắt cá.
+                </div>
+            </div>
+
+            <!-- Đoạn 12 -->
+            <div class="text-card">
+                <div style="color: var(--neon-gold); font-weight: bold; margin-bottom: 6px;">Đoạn 12: Miêu tả chi tiết hai ông chài</div>
+                <div class="hanzi-text">12. 兩漁翁，鬚眉皆白，披蓑衣，戴箬帽，同坐岸上，張網捕魚。</div>
+                <div class="pinyin-text">Phiên âm: Lưỡng ngư ông, tu my giai bạch, phi tơi y, đái nhược mạo, đồng tọa ngạn thượng, trương võng bộ ngư.</div>
+                <div class="translation-text">
+                    <b>Dịch nghĩa:</b> Hai ông chài, râu và lông mày đều bạc, khoác áo tơi, đội nón lá (nón tre), cùng ngồi trên bờ sông, giăng lưới bắt cá.
+                </div>
+            </div>
+
+            <!-- Đoạn 13 -->
+            <div class="text-card">
+                <div style="color: var(--neon-gold); font-weight: bold; margin-bottom: 6px;">Đoạn 13: Công dụng của loài trâu</div>
+                <div class="hanzi-text">13. 牛力大，能耕田，能挽車。其肉可食，其乳可飲。</div>
+                <div class="pinyin-text">Phiên âm: Ngưu lực đại, năng canh điền, năng vãn xa. Kỳ nhục khả thực, kỳ nhũ khả ẩm.</div>
+                <div class="translation-text">
+                    <b>Dịch nghĩa:</b> Sức trâu lớn, có thể cày ruộng, có thể kéo xe. Thịt của nó ăn được, sữa của nó uống được.
+                </div>
+            </div>
+
+            <!-- Đoạn 14 -->
+            <div class="text-card">
+                <div style="color: var(--neon-gold); font-weight: bold; margin-bottom: 6px;">Đoạn 14: Giá trị toàn diện của con trâu</div>
+                <div class="hanzi-text">14. 其肉可食，其乳可飲，其角與皮，皆可制器。</div>
+                <div class="pinyin-text">Phiên âm: Kỳ nhục khả thực, kỳ nhũ khả ẩm, kỳ giác dữ bì, giai khả chế khí.</div>
+                <div class="translation-text">
+                    <b>Dịch nghĩa:</b> Thịt của nó ăn được, sữa của nó uống được, sừng và da của nó đều có thể chế tạo thành đồ dùng.
+                </div>
+            </div>
+
+            <!-- Đoạn 15 -->
+            <div class="text-card">
+                <div style="color: var(--neon-gold); font-weight: bold; margin-bottom: 6px;">Đoạn 15: Khởi nghĩa Hai Bà Trưng</div>
+                <div class="hanzi-text">15. 王, 姓徵, 諱側, 貉將之女。時交趾太守蘇定貪殘，殺其夫。</div>
+                <div class="pinyin-text">Phiên âm: Vương, tính Trưng, huý Trắc, Lạc tướng chi nữ. Thời Giao Chỉ thái thú Tô Định tham tàn, sát kỳ phu.</div>
+                <div class="translation-text">
+                    <b>Dịch nghĩa:</b> Vua (Hai Bà Trưng), họ Trưng, tên húy là Trắc, là con gái của quan Lạc tướng. Lúc bấy giờ thái thú Giao Chỉ là Tô Định tham lam tàn bạo, đã giết chồng bà.
+                </div>
+            </div>
+
+            <!-- Đoạn 16 -->
+            <div class="text-card">
+                <div style="color: var(--neon-gold); font-weight: bold; margin-bottom: 6px;">Đoạn 16: Dựng nước và danh hiệu nữ anh hùng</div>
+                <div class="hanzi-text">16. 建國自立爲王，都麋泠。我國獨立自王始，可謂女中第一英雄。</div>
+                <div class="pinyin-text">Phiên âm: Kiến quốc tự lập vi vương, đô Mê Linh. Ngã quốc độc lập tự vương thủy, khả vị nữ trung đệ nhất anh hùng.</div>
+                <div class="translation-text">
+                    <b>Dịch nghĩa:</b> Dựng nước tự lập làm vua, đóng đô ở Mê Linh. Nước ta độc lập bắt đầu từ nhà vua (Trưng Vương), có thể gọi là bậc nữ anh hùng đệ nhất trong phái nữ.
+                </div>
+            </div>
+        </div>
+
+        <!-- PHẦN 2: THỰC HÀNH TỰ DỊCH -->
+        <div id="practiceSection" style="display: none;">
+            <div style="margin-bottom: 20px; text-align: center; color: var(--text-sub);">
+                💡 <i>Bấm vào ô mờ bên dưới để hiện đáp án dịch nghĩa khi bạn đã tự nhẩm xong.</i>
+            </div>
+
+            <div class="practice-card">
+                <div class="hanzi-text">11. 雨將晴，河水清。兩漁翁，同坐岸上，張網捕魚。</div>
+                <div class="pinyin-text">Phiên âm: Vũ tương tình, hà thủy thanh...</div>
+                <div><b>Bấm để xem dịch nghĩa:</b></div>
+                <div class="hidden-answer" onclick="revealAnswer(this)">Mưa sắp tạnh, nước sông trong. Hai ông chài cùng ngồi trên bờ giăng lưới bắt cá.</div>
+            </div>
+
+            <div class="practice-card">
+                <div class="hanzi-text">12. 兩漁翁，鬚眉皆白，披蓑衣，戴箬帽...</div>
+                <div class="pinyin-text">Phiên âm: Lưỡng ngư ông, tu my giai bạch...</div>
+                <div><b>Bấm để xem dịch nghĩa:</b></div>
+                <div class="hidden-answer" onclick="revealAnswer(this)">Hai ông chài râu mày đều bạc, mặc áo tơi, đội nón lá, cùng ngồi trên bờ giăng lưới bắt cá.</div>
+            </div>
+
+            <div class="practice-card">
+                <div class="hanzi-text">13. 牛力大，能耕田，能挽車。其肉可食，其乳可飲。</div>
+                <div class="pinyin-text">Phiên âm: Ngưu lực đại, năng canh điền...</div>
+                <div><b>Bấm để xem dịch nghĩa:</b></div>
+                <div class="hidden-answer" onclick="revealAnswer(this)">Sức trâu lớn, cày ruộng được, kéo xe được. Thịt ăn được, sữa uống được.</div>
+            </div>
+
+            <div class="practice-card">
+                <div class="hanzi-text">14. 其肉可食，其乳可飲，其角與皮，皆可制器。</div>
+                <div class="pinyin-text">Phiên âm: Kỳ nhục khả thực, kỳ nhũ khả ẩm...</div>
+                <div><b>Bấm để xem dịch nghĩa:</b></div>
+                <div class="hidden-answer" onclick="revealAnswer(this)">Thịt ăn được, sữa uống được, sừng và da đều chế tạo được đồ dùng.</div>
+            </div>
+
+            <div class="practice-card">
+                <div class="hanzi-text">15. 王，姓徵，諱側，貉將之女。時交趾太守蘇定貪殘，殺其夫。</div>
+                <div class="pinyin-text">Phiên âm: Vương, tính Trưng, huý Trắc...</div>
+                <div><b>Bấm để xem dịch nghĩa:</b></div>
+                <div class="hidden-answer" onclick="revealAnswer(this)">Vua họ Trưng, húy Trắc, con Lạc tướng. Giao Chỉ thái thú Tô Định tham tàn giết chồng bà.</div>
+            </div>
+
+            <div class="practice-card">
+                <div class="hanzi-text">16. 建國自立爲王，都麋泠。我國獨立自王始...</div>
+                <div class="pinyin-text">Phiên âm: Kiến quốc tự lập vi vương, đô Mê Linh...</div>
+                <div><b>Bấm để xem dịch nghĩa:</b></div>
+                <div class="hidden-answer" onclick="revealAnswer(this)">Dựng nước lập làm vua, đóng đô Mê Linh. Nước ta độc lập bắt đầu từ Vua, là nữ anh hùng đệ nhất.</div>
+            </div>
+        </div>
+
+        <footer>
+            Chương trình Học & Ôn tập Hán Cổ • Thiết kế Tương tác Vũ trụ 🌌
+        </footer>
+    </div>
+
+    <script>
+        function switchSection(section) {
+            document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+            if (section === 'study') {
+                document.querySelectorAll(".tab-btn")[0].classList.add("active");
+                document.getElementById("studySection").style.display = "block";
+                document.getElementById("practiceSection").style.display = "none";
+            } else {
+                document.querySelectorAll(".tab-btn")[1].classList.add("active");
+                document.getElementById("studySection").style.display = "none";
+                document.getElementById("practiceSection").style.display = "block";
+            }
+        }
+
+        function revealAnswer(element) {
+            element.classList.toggle("revealed");
+        }
+    </script>
+</body>
+</html> 

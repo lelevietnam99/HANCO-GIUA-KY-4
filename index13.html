@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ôn Tập Hán Cổ - Trang 13: Ngữ Pháp & Bài Tập (Câu 81 - 90)</title>
+    <style>
+        :root {
+            --bg-color: #0B0D1B;
+            --card-bg: rgba(20, 24, 48, 0.9);
+            --card-border: rgba(120, 140, 255, 0.3);
+            --accent-glow: #7B61FF;
+            --neon-blue: #00F0FF;
+            --neon-green: #10B981;
+            --neon-red: #EF4444;
+            --neon-gold: #F59E0B;
+            --text-main: #E2E8F0;
+            --text-sub: #94A3B8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: radial-gradient(ellipse at bottom, #111827 0%, #050714 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Background Vũ Trụ */
+        .stars {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background: 
+                radial-gradient(2px 2px at 35px 45px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 80px 110px, #7B61FF, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 130px 60px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 200px 160px, #00F0FF, rgba(0,0,0,0));
+            background-size: 250px 250px;
+            opacity: 0.7;
+        }
+
+        .container {
+            max-width: 950px;
+            width: 100%;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 22px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(123, 97, 255, 0.2);
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            color: #FFF;
+            text-shadow: 0 0 12px var(--accent-glow);
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: var(--neon-blue);
+            font-size: 0.95rem;
+        }
+
+        /* Switch Tabs */
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--accent-glow);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px var(--accent-glow);
+            color: #FFF;
+        }
+
+        /* Section 1: Study Cards */
+        .study-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: 0.2s;
+        }
+
+        .study-card:hover {
+            border-color: var(--neon-blue);
+        }
+
+        .sentence-hanzi {
+            font-size: 1.8rem;
+            color: #FFF;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+
+        .sentence-pinyin {
+            font-size: 1.1rem;
+            color: var(--neon-gold);
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .sentence-translation {
+            font-size: 1.05rem;
+            color: var(--neon-blue);
+            font-style: italic;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed var(--card-border);
+        }
+
+        .grammar-analysis {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-main);
+            background: rgba(10, 14, 30, 0.6);
+            padding: 12px 16px;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-glow);
+        }
+
+        .highlight-word {
+            color: #F43F5E;
+            font-weight: bold;
+        }
+
+        /* Section 2: Quiz Cards */
+        .quiz-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .quiz-title {
+            font-size: 1.2rem;
+            color: #FFF;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 600px) {
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 12px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            background: rgba(123, 97, 255, 0.3);
+            border-color: var(--neon-blue);
+        }
+
+        .option-btn.correct {
+            background: rgba(16, 185, 129, 0.25) !important;
+            border-color: var(--neon-green) !important;
+            color: #34D399;
+            font-weight: bold;
+        }
+
+        .option-btn.incorrect {
+            background: rgba(239, 68, 68, 0.25) !important;
+            border-color: var(--neon-red) !important;
+            color: #F87171;
+        }
+
+        .explanation {
+            margin-top: 10px;
+            padding: 10px 14px;
+            background: rgba(10, 14, 30, 0.7);
+            border-left: 4px solid var(--neon-blue);
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            display: none;
+            line-height: 1.5;
+        }
+
+        .controls-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(123, 97, 255, 0.15);
+            border: 1px solid var(--accent-glow);
+            padding: 14px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .action-btn {
+            background: var(--accent-glow);
+            border: 1px solid var(--neon-blue);
+            color: #FFF;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .action-btn:hover {
+            background: var(--neon-blue);
+            color: #0B0D1B;
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: var(--text-sub);
+            font-size: 0.85rem;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+
+    <div class="container">
+        <header>
+            <h1>HÁN CỔ - ÔN TẬP GIỮA KỲ IV</h1>
+            <p>Trang 13: Ngữ Pháp & Bài Tập Chấm Điểm (Câu 81 đến Câu 90)</p>
+        </header>
+
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchSection('study')">📚 Phần 1: Tự Học & Giải Nghĩa</button>
+            <button class="tab-btn" onclick="switchSection('quiz')">✍️ Phần 2: Kiểm Tra Trắc Nghiệm (10 Câu Xáo Trộn)</button>
+        </div>
+
+        <!-- PHẦN 1: TỰ HỌC VÀ GIẢI NGHĨA -->
+        <div id="studySection">
+            <!-- Câu 81 -->
+            <div class="study-card">
+                <div class="sentence-hanzi">81. 以子之矛，陷子之盾，何如？</div>
+                <div class="sentence-pinyin">Phiên âm: Dĩ tử chi mâu, hãm tử chi thuẫn, hà như?</div>
+                <div class="sentence-translation">Dịch nghĩa: Lấy giáo của anh, đâm vào mộc của anh, thì thế nào?</div>
+                <div class="grammar-analysis">
+                    <b>Phân tích ngữ pháp & Từ loại:</b><br>
+                    • <b>以子之矛</b>: Lấy giáo của anh.<br>
+                    • <span class="highlight-word">之 (chi)</span>: <b>Trợ từ kết cấu</b> đứng giữa định ngữ 子 (anh) và trung tâm ngữ 矛 (giáo) để biểu thị quan hệ sở hữu ("giáo của anh").<br>
+                    • <b>陷子之盾</b>: Đâm thủng mộc của anh.
+                </div>
+            </div>
+
+            <!-- Câu 82 -->
+            <div class="study-card">
+                <div class="sentence-hanzi">82. 昇龍城昔號龍编地。</div>
+                <div class="sentence-pinyin">Phiên âm: Thăng Long thành tích hiệu Long Biên địa.</div>
+                <div class="sentence-translation">Dịch nghĩa: Thành Thăng Long ngày xưa hiệu là đất Long Biên.</div>
+                <div class="grammar-analysis">
+                    <b>Phân tích ngữ pháp & Từ loại:</b><br>
+                    • <b>昇龍城</b>: Thành Thăng Long.<br>
+                    • <span class="highlight-word">昔 (tịch)</span>: <b>Phó từ</b> chỉ thời gian trong quá khứ ("ngày xưa / thuở trước"), đứng trước động từ 號 (hiệu là) để làm trạng ngữ chỉ thời gian.<br>
+                    • <b>號龍编地</b>: Mang tên là đất Long Biên.
+                </div>
+            </div>
+
+            <!-- Câu 83 -->
+            <div class="study-card">
+                <div class="sentence-hanzi">83. 王，姓徵，諱側，貉將之女。</div>
+                <div class="sentence-pinyin">Phiên âm: Vương, tính Trưng, huý Trắc, Lạc tướng chi nữ.</div>
+                <div class="sentence-translation">Dịch nghĩa: Vua, họ Trưng, tên húy là Trắc, con gái của quan Lạc tướng.</div>
+                <div class="grammar-analysis">
+                    <b>Phân tích ngữ pháp & Từ loại:</b><br>
+                    • <b>貉將之女</b>: Con gái của Lạc tướng.<br>
+                    • <span class="highlight-word">之 (chi)</span>: <b>Trợ từ kết cấu</b> đặt giữa 貉將 (Lạc tướng) và 女 (con gái) để chỉ quan hệ huyết thống/sở hữu ("con gái của").
+                </div>
+            </div>
+
+            <!-- Câu 84 -->
+            <div class="study-card">
+                <div class="sentence-hanzi">84. 舟已行矣，而劍不行。</div>
+                <div class="sentence-pinyin">Phiên âm: Chu dĩ hành hĩ, nhi kiếm bất hành.</div>
+                <div class="sentence-translation">Dịch nghĩa: Thuyền đã đi rồi, mà thanh gươm thì không đi.</div>
+                <div class="grammar-analysis">
+                    <b>Phân tích ngữ pháp & Từ loại:</b><br>
+                    • <b>舟已行矣</b>: Thuyền đã chạy rồi (已: phó từ đã, 矣: trợ từ ngữ khí).<br>
+                    • <span class="highlight-word">而 (nhi)</span>: <b>Liên từ</b> biểu thị quan hệ chuyển ngoặt hoặc đối lập ("mà / nhưng mà"), nối giữa hai vế câu thuyền chạy và gươm không chạy.<br>
+                    • <b>劍不行</b>: Kiếm không di chuyển.
+                </div>
+            </div>
+
+            <!-- Câu 85 -->
+            <div class="study-card">
+                <div class="sentence-hanzi">85. 兩漁翁。</div>
+                <div class="sentence-pinyin">Phiên âm: Lưỡng ngư ông.</div>
+                <div class="sentence-translation">Dịch nghĩa: Hai ông lão đánh cá.</div>
+                <div class="grammar-analysis">
+                    <b>Phân tích ngữ pháp & Từ loại:</b><br>
+                    • <span class="highlight-word">兩 (lưỡng)</span>: <b>Số từ</b> chỉ số lượng "hai", đứng trước danh từ/lượng từ để chỉ định số lượng ngư ông.<br>
+                    • <b>漁翁</b>: Ngư ông / ông chài.
+                </div>
+            </div>
+
+            <!-- Câu 86 -->
+            <div class="study-card">
+                <div class="sentence-hanzi">86. 庭中種桂，其葉常綠。</div>
+                <div class="sentence-pinyin">Phiên âm: Đình trung chủng quế, kỳ diệp thường lục.</div>
+                <div class="sentence-translation">Dịch nghĩa: Trong sân trồng cây quế, lá của nó luôn xanh tươi.</div>
+                <div class="grammar-analysis">
+                    <b>Phân tích ngữ pháp & Từ loại:</b><br>
+                    • <b>庭中</b>: Trong sân.<br>
+                    • <b>其葉常綠</b>: Lá của nó luôn xanh.<br>
+                    • <span class="highlight-word">常 (thường)</span>: <b>Phó từ</b> chỉ tần suất liên tục không thay đổi ("luôn / luôn luôn / thường"), đứng trước tính từ 綠 (lục - xanh) để bổ nghĩa.
+                </div>
+            </div>
+
+            <!-- Câu 87 -->
+            <div class="study-card">
+                <div class="sentence-hanzi">87. 山之大者，草，木生之，禽獸居之。</div>
+                <div class="sentence-pinyin">Phiên âm: Sơn chi đại giả, thảo, mộc sinh chi, cầm thú cư chi.</div>
+                <div class="sentence-translation">Dịch nghĩa: Ngọn núi lớn, cỏ cây mọc ở đó, chim thú sinh sống ở đó.</div>
+                <div class="grammar-analysis">
+                    <b>Phân tích ngữ pháp & Từ loại:</b><br>
+                    • <b>草木生之</b>: Cỏ cây mọc ở đó.<br>
+                    • <span class="highlight-word">之 (chi)</span>: <b>Đại từ</b> làm tân ngữ chỉ định địa điểm ("ở nơi đó / ở ngọn núi ấy").
+                </div>
+            </div>
+
+            <!-- Câu 88 -->
+            <div class="study-card">
+                <div class="sentence-hanzi">88. 我國獨立自王始，可謂女中第一英雄。</div>
+                <div class="sentence-pinyin">Phiên âm: Ngã quốc độc lập tự vương thủy, khả vị nữ trung đệ nhất anh hùng.</div>
+                <div class="sentence-translation">Dịch nghĩa: Nước ta độc lập bắt đầu từ nhà vua (Trưng Vương), có thể gọi là bậc nữ anh hùng đệ nhất trong phái nữ.</div>
+                <div class="grammar-analysis">
+                    <b>Phân tích ngữ pháp & Từ loại:</b><br>
+                    • <b>女中</b>: Trong hàng phụ nữ.<br>
+                    • <span class="highlight-word">中 (trung)</span>: <b>Phương vị từ</b> chỉ vị trí ở giữa / bên trong ("trong hàng ngũ / trong số"), kết hợp với danh từ 女 (nữ) tạo thành cụm chỉ phạm vi.
+                </div>
+            </div>
+
+            <!-- Câu 89 -->
+            <div class="study-card">
+                <div class="sentence-hanzi">89. 誠無窮之利也。</div>
+                <div class="sentence-pinyin">Phiên âm: Thành vô cùng chi lợi dã.</div>
+                <div class="sentence-translation">Dịch nghĩa: Quả thực là lợi ích vô cùng to lớn vậy.</div>
+                <div class="grammar-analysis">
+                    <b>Phân tích ngữ pháp & Từ loại:</b><br>
+                    • <b>誠</b>: Quả thực (Phó từ).<br>
+                    • <b>無窮之利</b>: Lợi ích vô cùng.<br>
+                    • <span class="highlight-word">之 (chi)</span>: <b>Trợ từ kết cấu</b> đặt giữa định ngữ 無窮 (vô cùng) và trung tâm ngữ 利 (lợi ích) để nối kết ý nghĩa.
+                </div>
+            </div>
+
+            <!-- Câu 90 -->
+            <div class="study-card">
+                <div class="sentence-hanzi">90. 人之身體，以衣護之，以食養之。</div>
+                <div class="sentence-pinyin">Phiên âm: Nhân chi thân thể, dĩ y hộ chi, dĩ thực dưỡng chi.</div>
+                <div class="sentence-translation">Dịch nghĩa: Thân thể của con người, lấy áo quần để che chở, lấy cơm ăn để nuôi dưỡng.</div>
+                <div class="grammar-analysis">
+                    <b>Phân tích ngữ pháp & Từ loại:</b><br>
+                    • <b>人之身體</b>: Thân thể con người (之: trợ từ kết cấu).<br>
+                    • <span class="highlight-word">之 (chi)</span>: <b>Đại từ</b> làm tân ngữ đứng sau động từ 護 (che chở) và 養 (nuôi dưỡng), thay thế cho danh từ 身體 (thân thể).
+                </div>
+            </div>
+        </div>
+
+        <!-- PHẦN 2: BÀI TẬP TRẮC NGHIỆM XÁO TRỘN -->
+        <div id="quizSection" style="display: none;">
+            <div class="controls-bar">
+                <span id="scoreText">Tiến độ: 0 / 10 | Điểm: 0</span>
+                <button class="action-btn" onclick="shuffleAndResetQuiz()">🔀 Xáo Đề Bài Làm Lại</button>
+            </div>
+
+            <div id="quizContainer"></div>
+
+            <div style="text-align: center; margin: 25px 0;">
+                <button class="action-btn" style="padding: 14px 35px; font-size: 1.1rem;" onclick="checkAnswers()">🎯 Chấm Điểm & Xem Lời Giải</button>
+            </div>
+        </div>
+
+        <footer>
+            Chương trình Học & Ôn tập Hán Cổ • Thiết kế Tương tác Vũ trụ 🌌
+        </footer>
+    </div>
+
+    <script>
+        const rawQuizData = [
+            {
+                hanzi: "以子之矛，陷子之盾，何如？",
+                pinyin: "Dĩ tử chi mâu, hãm tử chi thuẫn, hà như?",
+                translation: "Lấy giáo của anh đâm mộc của anh, thế nào?",
+                question: "81/ 以子之矛，陷子之盾，何如？Trong câu này, 之 là:",
+                options: ["a/ Liên từ", "b/ Giới từ", "c/ Trợ từ kết cấu", "d/ Phó từ"],
+                correctIndex: 2,
+                explanation: "«之» (chi) là Trợ từ kết cấu biểu thị quan hệ sở hữu."
+            },
+            {
+                hanzi: "昇龍城昔號龍编地。",
+                pinyin: "Thăng Long thành tích hiệu Long Biên địa.",
+                translation: "Thành Thăng Long ngày xưa gọi là đất Long Biên.",
+                question: "82/ 昇龍城昔號龍编地。Trong câu này, 昔 là:",
+                options: ["a/ Giới từ", "b/ Trợ từ", "c/ Liên từ", "d/ Phó từ"],
+                correctIndex: 3,
+                explanation: "«昔» (tịch: ngày xưa) là Phó từ thời gian."
+            },
+            {
+                hanzi: "王，姓徵，諱側，貉將之女。",
+                pinyin: "Vương, tính Trưng, huý Trắc, Lạc tướng chi nữ.",
+                translation: "Vua họ Trưng, húy Trắc, con gái Lạc tướng.",
+                question: "83/ 王，姓徵，諱側，貉將之女。Trong câu này, 之 là:",
+                options: ["a/ Trợ từ kết cấu", "b/ Liên từ", "c/ Phó từ", "d/ Giới từ"],
+                correctIndex: 0,
+                explanation: "«之» (chi) là Trợ từ kết cấu biểu thị quan hệ sở hữu."
+            },
+            {
+                hanzi: "舟已行矣，而劍不行。",
+                pinyin: "Chu dĩ hành hĩ, nhi kiếm bất hành.",
+                translation: "Thuyền đã đi, mà kiếm không đi.",
+                question: "84/ 舟已行矣，而劍不行。Trong câu này, 已 là:",
+                options: ["a/ Liên từ", "b/ Trợ từ", "c/ Phó từ", "d/ Giới từ"],
+                correctIndex: 2,
+                explanation: "«已» (dĩ: đã) là Phó từ chỉ thời gian."
+            },
+            {
+                hanzi: "兩漁翁。",
+                pinyin: "Lưỡng ngư ông.",
+                translation: "Hai ông chài.",
+                question: "85/ 兩漁翁。Trong câu này, 兩 là:",
+                options: ["a/ Số từ", "b/ Liên từ", "c/ Phó từ", "d/ Trợ từ"],
+                correctIndex: 0,
+                explanation: "«兩» (lưỡng) là Số từ chỉ số lượng hai."
+            },
+            {
+                hanzi: "庭中種桂，其葉常綠。",
+                pinyin: "Đình trung chủng quế, kỳ diệp thường lục.",
+                translation: "Trong sân trồng quế, lá luôn xanh.",
+                question: "86/ 庭中種桂，其葉常綠。Trong câu này, 常 là:",
+                options: ["a/ Giới từ", "b/ Liên từ", "c/ Trợ từ", "d/ Phó từ"],
+                correctIndex: 3,
+                explanation: "«常» (thường) là Phó từ chỉ tần suất."
+            },
+            {
+                hanzi: "山之大者，草，木生之，禽獸居之。",
+                pinyin: "Sơn chi đại giả, thảo, mộc sinh chi, cầm thú cư chi.",
+                translation: "Ngọn núi lớn, cỏ cây mọc ở đó, chim thú sống ở đó.",
+                question: "87/ 山之大者，草，木生之，禽獸居之。Trong câu này, 之3 là:",
+                options: ["a/ Phó từ", "b/ Giới từ", "c/ Đại từ", "d/ Trợ từ"],
+                correctIndex: 2,
+                explanation: "«之» (chi) là Đại từ chỉ định địa điểm."
+            },
+            {
+                hanzi: "我國獨立自王始，可謂女中第一英雄。",
+                pinyin: "Ngã quốc độc lập tự vương thủy, khả vị nữ trung đệ nhất anh hùng.",
+                translation: "Nước ta độc lập từ vua, là nữ anh hùng đệ nhất.",
+                question: "88/ 我國獨立自王始，可謂女中第一英雄。Trong câu này, 中 là:",
+                options: ["a/ Phó từ", "b/ Phương vị từ", "c/ Giới từ", "d/ Liên từ"],
+                correctIndex: 1,
+                explanation: "«中» (trung) là Phương vị từ chỉ vị trí bên trong/ở giữa."
+            },
+            {
+                hanzi: "誠無窮之利也。",
+                pinyin: "Thành vô cùng chi lợi dã.",
+                translation: "Quả thực là lợi ích vô cùng.",
+                question: "89/ 誠無窮之利也。Trong câu này, 之 là:",
+                options: ["a/ Trợ từ kết cấu", "b/ Phó từ", "c/ Liên từ", "d/ Giới từ"],
+                correctIndex: 0,
+                explanation: "«之» (chi) là Trợ từ kết cấu."
+            },
+            {
+                hanzi: "人之身體，以衣護之，以食養之。",
+                pinyin: "Nhân chi thân thể, dĩ y hộ chi, dĩ thực dưỡng chi.",
+                translation: "Thân thể con người, lấy áo che, lấy ăn nuôi.",
+                question: "90/ 人之身體，以衣護之，以食養之。Trong câu này, 之1 là:",
+                options: ["a/ Giới từ", "b/ Liên từ", "c/ Phó từ", "d/ Trợ từ kết cấu"],
+                correctIndex: 3,
+                explanation: "«之» đặt giữa 人 và 身體 là Trợ từ kết cấu."
+            }
+        ];
+
+        let currentQuizData = [];
+        let userAnswers = {};
+
+        function switchSection(section) {
+            document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+            if (section === 'study') {
+                document.querySelectorAll(".tab-btn")[0].classList.add("active");
+                document.getElementById("studySection").style.display = "block";
+                document.getElementById("quizSection").style.display = "none";
+            } else {
+                document.querySelectorAll(".tab-btn")[1].classList.add("active");
+                document.getElementById("studySection").style.display = "none";
+                document.getElementById("quizSection").style.display = "block";
+                if (currentQuizData.length === 0) {
+                    shuffleAndResetQuiz();
+                }
+            }
+        }
+
+        // Thuật toán xáo trộn mảng (Fisher-Yates Shuffle)
+        function shuffleArray(array) {
+            let arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function shuffleAndResetQuiz() {
+            currentQuizData = shuffleArray(rawQuizData);
+            userAnswers = {};
+            renderQuiz();
+            document.getElementById("scoreText").innerText = "Tiến độ: 0 / 10 | Điểm: 0";
+        }
+
+        function renderQuiz() {
+            const container = document.getElementById("quizContainer");
+            container.innerHTML = "";
+
+            currentQuizData.forEach((q, qIndex) => {
+                const card = document.createElement("div");
+                card.className = "quiz-card";
+
+                let optionsHTML = '<div class="options-grid">';
+                q.options.forEach((opt, optIndex) => {
+                    optionsHTML += `<button class="option-btn" id="q${qIndex}-opt${optIndex}" onclick="selectAnswer(${qIndex}, ${optIndex})">${opt}</button>`;
+                });
+                optionsHTML += '</div>';
+
+                card.innerHTML = `
+                    <div class="quiz-title"><b>Câu ${qIndex + 1}:</b> ${q.hanzi}</div>
+                    <div style="color: var(--neon-gold); font-size: 0.95rem; margin-bottom: 4px;">Phiên âm: ${q.pinyin}</div>
+                    <div style="color: var(--neon-blue); font-size: 0.95rem; margin-bottom: 12px; font-style: italic;">Dịch: "${q.translation}"</div>
+                    <div style="font-weight: bold; margin-bottom: 10px;">${q.question}</div>
+                    ${optionsHTML}
+                    <div class="explanation" id="exp-${qIndex}">
+                        <b>💡 Dịch nghĩa & Giải thích:</b><br>
+                        • <i>Dịch cả câu:</i> ${q.translation}<br>
+                        • <i>Đáp án đúng:</i> ${q.explanation}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function selectAnswer(qIndex, optIndex) {
+            userAnswers[qIndex] = optIndex;
+
+            for (let i = 0; i < 4; i++) {
+                const btn = document.getElementById(`q${qIndex}-opt${i}`);
+                btn.style.background = "rgba(255, 255, 255, 0.05)";
+                btn.style.borderColor = "var(--card-border)";
+                btn.style.color = "var(--text-main)";
+            }
+
+            const selectedBtn = document.getElementById(`q${qIndex}-opt${optIndex}`);
+            selectedBtn.style.background = "rgba(123, 97, 255, 0.4)";
+            selectedBtn.style.borderColor = "var(--neon-blue)";
+            selectedBtn.style.color = "#FFF";
+
+            const answeredCount = Object.keys(userAnswers).length;
+            document.getElementById("scoreText").innerText = `Tiến độ: ${answeredCount} / 10`;
+        }
+
+        function checkAnswers() {
+            let correctCount = 0;
+
+            currentQuizData.forEach((q, qIndex) => {
+                const selectedOpt = userAnswers[qIndex];
+                const expDiv = document.getElementById(`exp-${qIndex}`);
+                expDiv.style.display = "block";
+
+                for (let i = 0; i < 4; i++) {
+                    const btn = document.getElementById(`q${qIndex}-opt${i}`);
+                    btn.disabled = true;
+
+                    if (i === q.correctIndex) {
+                        btn.classList.add("correct");
+                    } else if (i === selectedOpt && selectedOpt !== q.correctIndex) {
+                        btn.classList.add("incorrect");
+                    }
+                }
+
+                if (selectedOpt === q.correctIndex) {
+                    correctCount++;
+                }
+            });
+
+            const finalScore = correctCount * 10;
+            document.getElementById("scoreText").innerText = `Hoàn thành! Đúng: ${correctCount}/10 câu (${finalScore} điểm)`;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html> 

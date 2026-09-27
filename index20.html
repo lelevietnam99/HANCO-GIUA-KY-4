@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ôn Tập Hán Cổ - Trang 20: Từ Âm Hán Việt Viết Chữ Hán & Dịch Nghĩa (Câu 13 - 17)</title>
+    <style>
+        :root {
+            --bg-color: #0B0D1B;
+            --card-bg: rgba(20, 24, 48, 0.9);
+            --card-border: rgba(120, 140, 255, 0.3);
+            --accent-glow: #7B61FF;
+            --neon-blue: #00F0FF;
+            --neon-green: #10B981;
+            --neon-gold: #F59E0B;
+            --text-main: #E2E8F0;
+            --text-sub: #94A3B8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: radial-gradient(ellipse at bottom, #111827 0%, #050714 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Background Vũ Trụ */
+        .stars {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background: 
+                radial-gradient(2px 2px at 35px 45px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 80px 110px, #7B61FF, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 130px 60px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 200px 160px, #00F0FF, rgba(0,0,0,0));
+            background-size: 250px 250px;
+            opacity: 0.7;
+        }
+
+        .container {
+            max-width: 950px;
+            width: 100%;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 22px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(123, 97, 255, 0.2);
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            color: #FFF;
+            text-shadow: 0 0 12px var(--accent-glow);
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: var(--neon-blue);
+            font-size: 0.95rem;
+        }
+
+        /* Switch Tabs */
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--accent-glow);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px var(--accent-glow);
+            color: #FFF;
+        }
+
+        /* Study Cards */
+        .text-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: 0.2s;
+        }
+
+        .text-card:hover {
+            border-color: var(--neon-blue);
+        }
+
+        .hanzi-text {
+            font-size: 1.6rem;
+            color: #FFF;
+            margin-bottom: 10px;
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 8px rgba(255,255,255,0.3);
+        }
+
+        .pinyin-text {
+            font-size: 1.15rem;
+            color: var(--neon-gold);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .translation-text {
+            font-size: 1.05rem;
+            color: var(--neon-blue);
+            line-height: 1.5;
+            background: rgba(10, 14, 30, 0.6);
+            padding: 14px 16px;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-glow);
+        }
+
+        /* Interactive Practice Cards */
+        .practice-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hidden-answer {
+            filter: blur(6px);
+            user-select: none;
+            cursor: pointer;
+            transition: 0.3s;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 12px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-top: 8px;
+            color: #FFF;
+            font-size: 1.3rem;
+        }
+
+        .hidden-answer.revealed {
+            filter: blur(0);
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid var(--neon-green);
+            color: var(--neon-blue);
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: var(--text-sub);
+            font-size: 0.85rem;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+
+    <div class="container">
+        <header>
+            <h1>HÁN CỔ - ÔN TẬP GIỮA KỲ IV</h1>
+            <p>Trang 20: Từ Âm Hán Việt Viết Chữ Hán & Dịch Nghĩa (Câu 13 đến Câu 17 - Cảnh Tỉnh Vô Thường)</p>
+        </header>
+
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchSection('study')">📚 Phần 1: Tự Học & Tra Cứu</button>
+            <button class="tab-btn" onclick="switchSection('practice')">✍️ Phần 2: Luyện Viết & Tự Dịch</button>
+        </div>
+
+        <!-- PHẦN 1: TỰ HỌC & TRA CỨU -->
+        <div id="studySection">
+            <div class="text-card">
+                <div style="color: var(--neon-gold); font-weight: bold; margin-bottom: 6px;">Câu 13</div>
+                <div class="pinyin-text">Phiên âm: Nhật nguyệt như thoa, phi thường tấn tốc, thiết mạc tha đà.</div>
+                <div class="hanzi-text">Chữ Hán: 日月如梭，非常迅速，切莫蹉跎。</div>
+                <div class="translation-text"><b>Dịch nghĩa:</b> Ngày tháng tợ thoi đưa, sự vô thường rất nhanh chóng, chúng ta đâu nên dần dà!</div>
+            </div>
+
+            <div class="text-card">
+                <div style="color: var(--neon-gold); font-weight: bold; margin-bottom: 6px;">Câu 14</div>
+                <div class="pinyin-text">Phiên âm: Thị nhật dĩ quá, mạng diệc tùy giảm, như thiểu thủy ngư.</div>
+                <div class="hanzi-text">Chữ Hán: 是日已過，命亦隨減，如少水魚。</div>
+                <div class="translation-text"><b>Dịch nghĩa:</b> Ngày nay đã qua, thân người cũng già lần (mạng sống giảm dần), như cá thiếu nước.</div>
+            </div>
+
+            <div class="text-card">
+                <div style="color: var(--neon-gold); font-weight: bold; margin-bottom: 6px;">Câu 15</div>
+                <div class="pinyin-text">Phiên âm: Mạng diệc tùy giảm, như thiểu thủy ngư, tư hữu hà lạc.</div>
+                <div class="hanzi-text">Chữ Hán: 命亦隨減，如少水魚，斯有何樂。</div>
+                <div class="translation-text"><b>Dịch nghĩa:</b> Thân người cũng già lần (mạng sống giảm dần), như cá thiếu nước, nào có vui sướng gì?</div>
+            </div>
+
+            <div class="text-card">
+                <div style="color: var(--neon-gold); font-weight: bold; margin-bottom: 6px;">Câu 16</div>
+                <div class="pinyin-text">Phiên âm: Đại chúng đương cần tinh tiến, như cứu đầu nhiên.</div>
+                <div class="hanzi-text">Chữ Hán: 大眾當勤精進，如救頭然。</div>
+                <div class="translation-text"><b>Dịch nghĩa:</b> Đại chúng hãy siêng năng tinh tấn, như cứu lửa cháy trên đầu.</div>
+            </div>
+
+            <div class="text-card">
+                <div style="color: var(--neon-gold); font-weight: bold; margin-bottom: 6px;">Câu 17</div>
+                <div class="pinyin-text">Phiên âm: Đại chúng đãn niệm vô thường, thận vật phóng dật.</div>
+                <div class="hanzi-text">Chữ Hán: 大眾但念無常，慎勿放逸。</div>
+                <div class="translation-text"><b>Dịch nghĩa:</b> Đại chúng chỉ nhớ vô thường; cẩn thận chớ buông lung.</div>
+            </div>
+        </div>
+
+        <!-- PHẦN 2: LUYỆN VIẾT CHỮ HÁN & TỰ DỊCH -->
+        <div id="practiceSection" style="display: none;">
+            <div style="margin-bottom: 20px; text-align: center; color: var(--text-sub);">
+                💡 <i>Dựa vào phiên âm, bạn hãy nhẩm viết chữ Hán và dịch nghĩa ra nháp, sau đó bấm vào ô mờ để xem đáp án.</i>
+            </div>
+
+            <div class="practice-card">
+                <div class="pinyin-text">13. Nhật nguyệt như thoa, phi thường tấn tốc, thiết mạc tha đà.</div>
+                <div><b>Bấm để xem Chữ Hán & Dịch nghĩa:</b></div>
+                <div class="hidden-answer" onclick="revealAnswer(this)">日月如梭，非常迅速，切莫蹉跎。<br>(Ngày tháng tợ thoi đưa, sự vô thường rất nhanh chóng, chúng ta đâu nên dần dà!)</div>
+            </div>
+
+            <div class="practice-card">
+                <div class="pinyin-text">14. Thị nhật dĩ quá, mạng diệc tùy giảm, như thiểu thủy ngư.</div>
+                <div><b>Bấm để xem Chữ Hán & Dịch nghĩa:</b></div>
+                <div class="hidden-answer" onclick="revealAnswer(this)">是日已過，命亦隨減，如少水魚。<br>(Ngày nay đã qua, thân người cũng già lần, như cá thiếu nước.)</div>
+            </div>
+
+            <div class="practice-card">
+                <div class="practice-card">
+                <div class="pinyin-text">15. Mạng diệc tùy giảm, như thiểu thủy ngư, tư hữu hà lạc.</div>
+                <div><b>Bấm để xem Chữ Hán & Dịch nghĩa:</b></div>
+                <div class="hidden-answer" onclick="revealAnswer(this)">命亦隨減，如少水魚，斯有何樂。<br>(Thân người cũng già lần, như cá thiếu nước, nào có vui sướng gì?)</div>
+            </div>
+
+            <div class="practice-card">
+                <div class="pinyin-text">16. Đại chúng đương cần tinh tiến, như cứu đầu nhiên.</div>
+                <div><b>Bấm để xem Chữ Hán & Dịch nghĩa:</b></div>
+                <div class="hidden-answer" onclick="revealAnswer(this)">大眾當勤精進，如救頭然。<br>(Đại chúng hãy siêng năng tinh tấn, như cứu lửa cháy trên đầu.)</div>
+            </div>
+
+            <div class="practice-card">
+                <div class="pinyin-text">17. Đại chúng đãn niệm vô thường, thận vật phóng dật.</div>
+                <div><b>Bấm để xem Chữ Hán & Dịch nghĩa:</b></div>
+                <div class="hidden-answer" onclick="revealAnswer(this)">大眾但念無常，慎勿放逸。<br>(Đại chúng chỉ nhớ vô thường; cẩn thận chớ buông lung.)</div>
+            </div>
+        </div>
+
+        <footer>
+            Chúc bạn hoàn thành xuất sắc kỳ thi môn Hán Cổ! • Thiết kế Tương tác Vũ trụ 🌌
+        </footer>
+    </div>
+
+    <script>
+        function switchSection(section) {
+            document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+            if (section === 'study') {
+                document.querySelectorAll(".tab-btn")[0].classList.add("active");
+                document.getElementById("studySection").style.display = "block";
+                document.getElementById("practiceSection").style.display = "none";
+            } else {
+                document.querySelectorAll(".tab-btn")[1].classList.add("active");
+                document.getElementById("studySection").style.display = "none";
+                document.getElementById("practiceSection").style.display = "block";
+            }
+        }
+
+        function revealAnswer(element) {
+            element.classList.toggle("revealed");
+        }
+    </script>
+</body>
+</html>

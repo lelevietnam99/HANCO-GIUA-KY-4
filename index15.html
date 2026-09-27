@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ôn Tập Hán Cổ - Trang 15: Phiên Âm & Dịch Nghĩa (Đoạn 1 - 2)</title>
+    <style>
+        :root {
+            --bg-color: #0B0D1B;
+            --card-bg: rgba(20, 24, 48, 0.9);
+            --card-border: rgba(120, 140, 255, 0.3);
+            --accent-glow: #7B61FF;
+            --neon-blue: #00F0FF;
+            --neon-green: #10B981;
+            --neon-gold: #F59E0B;
+            --text-main: #E2E8F0;
+            --text-sub: #94A3B8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: radial-gradient(ellipse at bottom, #111827 0%, #050714 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Background Vũ Trụ */
+        .stars {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background: 
+                radial-gradient(2px 2px at 35px 45px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 80px 110px, #7B61FF, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 130px 60px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 200px 160px, #00F0FF, rgba(0,0,0,0));
+            background-size: 250px 250px;
+            opacity: 0.7;
+        }
+
+        .container {
+            max-width: 950px;
+            width: 100%;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 22px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(123, 97, 255, 0.2);
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            color: #FFF;
+            text-shadow: 0 0 12px var(--accent-glow);
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: var(--neon-blue);
+            font-size: 0.95rem;
+        }
+
+        /* Switch Tabs */
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--accent-glow);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px var(--accent-glow);
+            color: #FFF;
+        }
+
+        /* Study Cards */
+        .text-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: 0.2s;
+        }
+
+        .text-card:hover {
+            border-color: var(--neon-blue);
+        }
+
+        .hanzi-text {
+            font-size: 1.6rem;
+            color: #FFF;
+            margin-bottom: 10px;
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 8px rgba(255,255,255,0.3);
+        }
+
+        .pinyin-text {
+            font-size: 1.1rem;
+            color: var(--neon-gold);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .translation-text {
+            font-size: 1.05rem;
+            color: var(--neon-blue);
+            line-height: 1.5;
+            background: rgba(10, 14, 30, 0.6);
+            padding: 14px 16px;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-glow);
+        }
+
+        /* Interactive Practice Cards */
+        .practice-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hidden-answer {
+            filter: blur(6px);
+            user-select: none;
+            cursor: pointer;
+            transition: 0.3s;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 12px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-top: 8px;
+            color: var(--neon-blue);
+        }
+
+        .hidden-answer.revealed {
+            filter: blur(0);
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid var(--neon-green);
+        }
+
+        .action-btn {
+            background: var(--accent-glow);
+            border: 1px solid var(--neon-blue);
+            color: #FFF;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .action-btn:hover {
+            background: var(--neon-blue);
+            color: #0B0D1B;
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: var(--text-sub);
+            font-size: 0.85rem;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+
+    <div class="container">
+        <header>
+            <h1>HÁN CỔ - ÔN TẬP GIỮA KỲ IV</h1>
+            <p>Trang 15: Phiên Âm Hán Việt & Dịch Nghĩa (Đoạn 1 và 2 - Sự Tích Mâu Thuẫn)</p>
+        </header>
+
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchSection('study')">📚 Phần 1: Tự Học & Dịch Nghĩa</button>
+            <button class="tab-btn" onclick="switchSection('practice')">✍️ Phần 2: Thực Hành Tự Dịch</button>
+        </div>
+
+        <!-- PHẦN 1: TỰ HỌC & DỊCH NGHĨA -->
+        <div id="studySection">
+            <div class="text-card">
+                <div style="color: var(--neon-gold); font-weight: bold; margin-bottom: 6px;">Đoạn 1: Mâu Thuẫn (Phần 1)</div>
+                <div class="hanzi-text">1. 楚人有鬻矛與盾者。譽其盾之堅，物莫能陷也。</div>
+                <div class="pinyin-text">Phiên âm: Sở nhân hữu dục mâu dữ thuẫn giả. Dự kỳ thuẫn chi kiên, vật mạc năng hãm dã.</div>
+                <div class="translation-text">
+                    <b>Dịch nghĩa:</b> Có người nước Sở bán mộc (khiên) và giáo. (Anh ta) hết lời khen ngợi cái mộc của mình rắn chắc (đến mức) không vật nào có thể đâm thủng được.
+                </div>
+            </div>
+
+            <div class="text-card">
+                <div style="color: var(--neon-gold); font-weight: bold; margin-bottom: 6px;">Đoạn 2: Mâu Thuẫn (Phần 2)</div>
+                <div class="hanzi-text">2. 俄而又譽其矛，曰：「吾矛之利，物無不陷也」。</div>
+                <div class="pinyin-text">Phiên âm: Nga nhi hựu dự kỳ mâu, viết: “Ngô mâu chi lợi, vật vô bất hãm dã”.</div>
+                <div class="translation-text">
+                    <b>Dịch nghĩa:</b> Chẳng bao lâu sau, (anh ta) lại ca ngợi cây giáo của mình rằng: “Độ sắc bén của cây giáo tôi, không vật gì là không đâm thủng được”.
+                </div>
+            </div>
+
+            <div class="text-card">
+                <div style="color: var(--neon-gold); font-weight: bold; margin-bottom: 6px;">Đoạn 3: Mâu Thuẫn (Phần 3 - Kết thúc câu chuyện)</div>
+                <div class="hanzi-text">3. 人應曰：「以子之矛，陷子之盾，何如？」。其人弗能應也。</div>
+                <div class="pinyin-text">Phiên âm: Nhân ứng viết: “Dĩ tử chi mâu, hãm tử chi thuẫn, hà như?”. Kỳ nhân phất năng ứng dã.</div>
+                <div class="translation-text">
+                    <b>Dịch nghĩa:</b> Có người bèn lên tiếng hỏi lại rằng: “(Anh thử) dùng cây giáo của anh, đâm vào cái mộc của anh, thì sẽ thế nào?”. Người ấy không sao trả lời được.
+                </div>
+            </div>
+        </div>
+
+        <!-- PHẦN 2: THỰC HÀNH TỰ DỊCH -->
+        <div id="practiceSection" style="display: none;">
+            <div style="margin-bottom: 20px; text-align: center; color: var(--text-sub);">
+                💡 <i>Bấm vào ô mờ bên dưới để hiện đáp án dịch nghĩa khi bạn đã tự nhẩm xong.</i>
+            </div>
+
+            <div class="practice-card">
+                <div class="hanzi-text">1. 楚人有鬻矛與盾者。</div>
+                <div class="pinyin-text">Phiên âm: Sở nhân hữu dục mâu dữ thuẫn giả.</div>
+                <div><b>Bấm để xem dịch nghĩa:</b></div>
+                <div class="hidden-answer" onclick="revealAnswer(this)">Có người nước Sở bán mộc và giáo.</div>
+            </div>
+
+            <div class="practice-card">
+                <div class="hanzi-text">2. 譽其盾之堅，物莫能陷也。</div>
+                <div class="pinyin-text">Phiên âm: Dự kỳ thuẫn chi kiên, vật mạc năng hãm dã.</div>
+                <div><b>Bấm để xem dịch nghĩa:</b></div>
+                <div class="hidden-answer" onclick="revealAnswer(this)">(Anh ta) khen mộc của mình rắn, không vật nào đâm thủng.</div>
+            </div>
+
+            <div class="practice-card">
+                <div class="hanzi-text">3. 俄而又譽其矛，曰：「吾矛之利，物無不陷也」。</div>
+                <div class="pinyin-text">Phiên âm: Nga nhi hựu dự kỳ mâu, viết...</div>
+                <div><b>Bấm để xem dịch nghĩa:</b></div>
+                <div class="hidden-answer" onclick="revealAnswer(this)">Chẳng bao lâu lại khen giáo: “Giáo tôi bén, không vật gì không thủng”.</div>
+            </div>
+
+            <div class="practice-card">
+                <div class="hanzi-text">4. 人應曰：「以子之矛，陷子之盾，何如？」</div>
+                <div class="pinyin-text">Phiên âm: Nhân ứng viết: “Dĩ tử chi mâu... hà như?”</div>
+                <div><b>Bấm để xem dịch nghĩa:</b></div>
+                <div class="hidden-answer" onclick="revealAnswer(this)">Có người ứng tiếng hỏi: “Lấy giáo của anh đâm vào mộc của anh, thế nào?”</div>
+            </div>
+
+            <div class="practice-card">
+                <div class="hanzi-text">5. 其人弗能應也。</div>
+                <div class="pinyin-text">Phiên âm: Kỳ nhân phất năng ứng dã.</div>
+                <div><b>Bấm để xem dịch nghĩa:</b></div>
+                <div class="hidden-answer" onclick="revealAnswer(this)">Người ấy không thể trả lời được.</div>
+            </div>
+        </div>
+
+        <footer>
+            Chương trình Học & Ôn tập Hán Cổ • Thiết kế Tương tác Vũ trụ 🌌
+        </footer>
+    </div>
+
+    <script>
+        function switchSection(section) {
+            document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+            if (section === 'study') {
+                document.querySelectorAll(".tab-btn")[0].classList.add("active");
+                document.getElementById("studySection").style.display = "block";
+                document.getElementById("practiceSection").style.display = "none";
+            } else {
+                document.querySelectorAll(".tab-btn")[1].classList.add("active");
+                document.getElementById("studySection").style.display = "none";
+                document.getElementById("practiceSection").style.display = "block";
+            }
+        }
+
+        function revealAnswer(element) {
+            element.classList.toggle("revealed");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trung Tâm Ôn Tập Hán Cổ - Giữa Kỳ IV</title>
+    <style>
+        :root {
+            --bg-color: #050714;
+            --card-bg: rgba(20, 24, 48, 0.85);
+            --card-border: rgba(120, 140, 255, 0.25);
+            --accent-glow: #7B61FF;
+            --neon-blue: #00F0FF;
+            --neon-green: #10B981;
+            --neon-purple: #D000FF;
+            --neon-gold: #F59E0B;
+            --text-main: #E2E8F0;
+            --text-sub: #94A3B8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: radial-gradient(ellipse at bottom, #111827 0%, #050714 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Hiệu ứng Vũ trụ sao lấp lánh */
+        .stars {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background: 
+                radial-gradient(2px 2px at 35px 45px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 80px 110px, #7B61FF, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 140px 70px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 210px 170px, #00F0FF, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 300px 250px, #D000FF, rgba(0,0,0,0));
+            background-size: 280px 280px;
+            opacity: 0.75;
+            animation: starsTwinkle 5s infinite ease-in-out alternate;
+        }
+
+        @keyframes starsTwinkle {
+            0% { opacity: 0.5; transform: scale(1); }
+            100% { opacity: 0.9; transform: scale(1.01); }
+        }
+
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 28px 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 30px rgba(123, 97, 255, 0.25);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: #FFF;
+            text-shadow: 0 0 16px var(--accent-glow);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            color: var(--neon-blue);
+            font-size: 1.05rem;
+            letter-spacing: 0.5px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(123, 97, 255, 0.2);
+            border: 1px solid var(--accent-glow);
+            color: #FFF;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-top: 10px;
+        }
+
+        /* Search & Filter Bar */
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .search-box {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: 1px solid var(--card-border);
+            background: rgba(15, 20, 45, 0.9);
+            color: #FFF;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .search-box input:focus {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        /* Section Block */
+        .section-title {
+            font-size: 1.35rem;
+            color: var(--neon-gold);
+            margin: 25px 0 15px 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
+            margin-bottom: 25px;
+        }
+
+        .page-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px; height: 100%;
+            background: var(--accent-glow);
+            transition: 0.3s;
+        }
+
+        .page-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--neon-blue);
+            box-shadow: 0 6px 20px rgba(0, 240, 255, 0.2);
+        }
+
+        .page-card:hover::before {
+            background: var(--neon-blue);
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .card-number {
+            font-size: 0.8rem;
+            color: var(--neon-blue);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .card-title {
+            font-size: 1.05rem;
+            color: #FFF;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.35;
+        }
+
+        .card-desc {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            line-height: 1.4;
+        }
+
+        .card-footer {
+            margin-top: 12px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--neon-green);
+            font-weight: 500;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            padding: 20px;
+            border-top: 1px solid var(--card-border);
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+
+    <div class="container">
+        <header>
+            <h1>🌌 HÁN CỔ - TỔNG HỢP ÔN TẬP GIỮA KỲ IV</h1>
+            <p>Khóa VIII - Khoa Đào Tạo Từ Xa (ĐTTX)</p>
+            <div class="badge">Trọn bộ 20 Trang Học Tập & Bài Tập Tương Tác</div>
+        </header>
+
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 Tìm kiếm trang, chủ đề, từ vựng, ngữ pháp..." oninput="filterPages()">
+            </div>
+        </div>
+
+        <!-- PHẦN 1: TỪ VỰNG HÁN CỔ -->
+        <div class="section-block" id="sec1">
+            <div class="section-title">🃏 PHẦN 1: TỪ VỰNG HÁN CỔ (FLASHCARD 3D & BỘ THỦ)</div>
+            <div class="grid-container">
+                <a href="index1.html" class="page-card">
+                    <div>
+                        <div class="card-number">Trang 01</div>
+                        <div class="card-title">Từ Vựng: Ác - Chư</div>
+                        <div class="card-desc">Flashcard 3D, phân tích cấu tạo bộ thủ & ý nghĩa Phật học sâu xa.</div>
+                    </div>
+                    <div class="card-footer">Vào Học ➡️</div>
+                </a>
+
+                <a href="index2.html" class="page-card">
+                    <div>
+                        <div class="card-number">Trang 02</div>
+                        <div class="card-title">Từ Vựng: Chứng - Đồng</div>
+                        <div class="card-desc">Thẻ ghi nhớ tương tác từ vựng nhóm chữ C, D, Đ.</div>
+                    </div>
+                    <div class="card-footer">Vào Học ➡️</div>
+                </a>
+
+                <a href="index3.html" class="page-card">
+                    <div>
+                        <div class="card-number">Trang 03</div>
+                        <div class="card-title">Từ Vựng: Gia - Mộc</div>
+                        <div class="card-desc">Thẻ ghi nhớ từ vựng nhóm chữ G, H, K, L, M.</div>
+                    </div>
+                    <div class="card-footer">Vào Học ➡️</div>
+                </a>
+
+                <a href="index4.html" class="page-card">
+                    <div>
+                        <div class="card-number">Trang 04</div>
+                        <div class="card-title">Từ Vựng: Nam - Y</div>
+                        <div class="card-desc">Hoàn thành trọn bộ từ vựng nhóm N, P, Q, S, T, U, V, X, Y.</div>
+                    </div>
+                    <div class="card-footer">Vào Học ➡️</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- PHẦN 2: NGỮ PHÁP & TRẮC NGHIỆM -->
+        <div class="section-block" id="sec2">
+            <div class="section-title">✍️ PHẦN 2: NGỮ PHÁP HÁN CỔ & BÀI TẬP CHẤM ĐIỂM (106 CÂU)</div>
+            <div class="grid-container">
+                <a href="index5.html" class="page-card">
+                    <div>
+                        <div class="card-number">Trang 05</div>
+                        <div class="card-title">Ngữ Pháp (Câu 1 - 10)</div>
+                        <div class="card-desc">Phân tích từ loại, dịch nghĩa trọn câu & Quiz xáo trộn chấm điểm.</div>
+                    </div>
+                    <div class="card-footer">Làm Bài ➡️</div>
+                </a>
+
+                <a href="index6.html" class="page-card">
+                    <div>
+                        <div class="card-number">Trang 06</div>
+                        <div class="card-title">Ngữ Pháp (Câu 11 - 20)</div>
+                        <div class="card-desc">Phó từ, trợ từ, cấu trúc phủ định & bài tập trắc nghiệm tự động.</div>
+                    </div>
+                    <div class="card-footer">Làm Bài ➡️</div>
+                </a>
+
+                <a href="index7.html" class="page-card">
+                    <div>
+                        <div class="card-number">Trang 07</div>
+                        <div class="card-title">Ngữ Pháp (Câu 21 - 30)</div>
+                        <div class="card-desc">Giải nghĩa câu cổ văn, phó từ chỉ thời gian & Quiz chấm điểm.</div>
+                    </div>
+                    <div class="card-footer">Làm Bài ➡️</div>
+                </a>
+
+                <a href="index8.html" class="page-card">
+                    <div>
+                        <div class="card-number">Trang 08</div>
+                        <div class="card-title">Ngữ Pháp (Câu 31 - 40)</div>
+                        <div class="card-desc">Trợ động từ, phó từ tần suất, phó từ phạm vi & xáo trộn câu hỏi.</div>
+                    </div>
+                    <div class="card-footer">Làm Bài ➡️</div>
+                </a>
+
+                <a href="index9.html" class="page-card">
+                    <div>
+                        <div class="card-number">Trang 09</div>
+                        <div class="card-title">Ngữ Pháp (Câu 41 - 50)</div>
+                        <div class="card-desc">Cấu trúc câu Hán cổ, phó từ giới hạn & trắc nghiệm chấm điểm.</div>
+                    </div>
+                    <div class="card-footer">Làm Bài ➡️</div>
+                </a>
+
+                <a href="index10.html" class="page-card">
+                    <div>
+                        <div class="card-number">Trang 10</div>
+                        <div class="card-title">Ngữ Pháp (Câu 51 - 60)</div>
+                        <div class="card-desc">Phương vị từ, trợ động từ chỉ khả năng & đáp án chi tiết.</div>
+                    </div>
+                    <div class="card-footer">Làm Bài ➡️</div>
+                </a>
+
+                <a href="index11.html" class="page-card">
+                    <div>
+                        <div class="card-number">Trang 11</div>
+                        <div class="card-title">Ngữ Pháp (Câu 61 - 70)</div>
+                        <div class="card-desc">Đại từ chỉ định, trợ từ kết cấu & bài tập xáo trộn 10 câu.</div>
+                    </div>
+                    <div class="card-footer">Làm Bài ➡️</div>
+                </a>
+
+                <a href="index12.html" class="page-card">
+                    <div>
+                        <div class="card-number">Trang 12</div>
+                        <div class="card-title">Ngữ Pháp (Câu 71 - 80)</div>
+                        <div class="card-desc">Liên từ, trợ từ ngữ khí, đại từ nhân xưng & Quiz trực tuyến.</div>
+                    </div>
+                    <div class="card-footer">Làm Bài ➡️</div>
+                </a>
+
+                <a href="index13.html" class="page-card">
+                    <div>
+                        <div class="card-number">Trang 13</div>
+                        <div class="card-title">Ngữ Pháp (Câu 81 - 90)</div>
+                        <div class="card-desc">Phó từ thời gian quá khứ, đại từ tân ngữ & bài tập chấm điểm.</div>
+                    </div>
+                    <div class="card-footer">Làm Bài ➡️</div>
+                </a>
+
+                <a href="index14.html" class="page-card">
+                    <div>
+                        <div class="card-number">Trang 14</div>
+                        <div class="card-title">Ngữ Pháp (Câu 91 - 106)</div>
+                        <div class="card-desc">Hoàn thành trọn bộ 106 câu trắc nghiệm ngữ pháp Hán cổ.</div>
+                    </div>
+                    <div class="card-footer">Làm Bài ➡️</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- PHẦN 3: PHIÊN ÂM & DỊCH NGHĨA -->
+        <div class="section-block" id="sec3">
+            <div class="section-title">📖 PHẦN 3: PHIÊN ÂM HÁN VIỆT & DỊCH NGHĨA VĂN BẢN</div>
+            <div class="grid-container">
+                <a href="index15.html" class="page-card">
+                    <div>
+                        <div class="card-number">Trang 15</div>
+                        <div class="card-title">Dịch Văn Bản (Đoạn 1 - 3)</div>
+                        <div class="card-desc">Truyện ngụ ngôn Mâu Thuẫn (Nước Sở bán mộc và giáo).</div>
+                    </div>
+                    <div class="card-footer">Đọc Bài ➡️</div>
+                </a>
+
+                <a href="index16.html" class="page-card">
+                    <div>
+                        <div class="card-number">Trang 16</div>
+                        <div class="card-title">Dịch Văn Bản (Đoạn 4 - 10)</div>
+                        <div class="card-desc">Lịch sử thành Thăng Long & Văn bản Sám Hối Phật giáo.</div>
+                    </div>
+                    <div class="card-footer">Đọc Bài ➡️</div>
+                </a>
+
+                <a href="index17.html" class="page-card">
+                    <div>
+                        <div class="card-number">Trang 17</div>
+                        <div class="card-title">Dịch Văn Bản (Đoạn 11 - 16)</div>
+                        <div class="card-desc">Cảnh hai ông chài, đặc tính con trâu & Khởi nghĩa Hai Bà Trưng.</div>
+                    </div>
+                    <div class="card-footer">Đọc Bài ➡️</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- PHẦN 4: VIẾT CHỮ HÁN & TỰ DỊCH -->
+        <div class="section-block" id="sec4">
+            <div class="section-title">🖌️ PHẦN 4: VIẾT CHỮ HÁN TỪ ÂM HÁN VIỆT & DỊCH NGHĨA</div>
+            <div class="grid-container">
+                <a href="index18.html" class="page-card">
+                    <div>
+                        <div class="card-number">Trang 18</div>
+                        <div class="card-title">Viết Chữ Hán (Câu 1 - 6)</div>
+                        <div class="card-desc">Luyện viết chữ Hán & dịch nghĩa: Cây ngô đồng, Bốn mùa.</div>
+                    </div>
+                    <div class="card-footer">Luyện Viết ➡️</div>
+                </a>
+
+                <a href="index19.html" class="page-card">
+                    <div>
+                        <div class="card-number">Trang 19</div>
+                        <div class="card-title">Viết Chữ Hán (Câu 7 - 12)</div>
+                        <div class="card-desc">Luyện viết chữ Hán & dịch nghĩa: Nông phu, Đuốc & Bóng, Thời gian.</div>
+                    </div>
+                    <div class="card-footer">Luyện Viết ➡️</div>
+                </a>
+
+                <a href="index20.html" class="page-card">
+                    <div>
+                        <div class="card-number">Trang 20</div>
+                        <div class="card-title">Viết Chữ Hán (Câu 13 - 17)</div>
+                        <div class="card-desc">Luyện viết chữ Hán & dịch nghĩa: Cảnh tỉnh vô thường, Khuyên tinh tấn.</div>
+                    </div>
+                    <div class="card-footer">Luyện Viết ➡️</div>
+                </a>
+            </div>
+        </div>
+
+        <footer>
+            Chúc bạn ôn tập hiệu quả và đạt kết quả tối đa trong kỳ thi Hán Cổ! 🌌
+        </footer>
+    </div>
+
+    <script>
+        function filterPages() {
+            const query = document.getElementById("searchInput").value.toLowerCase().trim();
+            const cards = document.querySelectorAll(".page-card");
+
+            cards.forEach(card => {
+                const title = card.querySelector(".card-title").innerText.toLowerCase();
+                const desc = card.querySelector(".card-desc").innerText.toLowerCase();
+                const number = card.querySelector(".card-number").innerText.toLowerCase();
+
+                if (title.includes(query) || desc.includes(query) || number.includes(query)) {
+                    card.style.display = "flex";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+    </script>
+</body>
+</html>

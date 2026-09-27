@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ôn Tập Hán Cổ - Trang 16: Lịch Sử Thăng Long & Sám Hối (Đoạn 4 - 10)</title>
+    <style>
+        :root {
+            --bg-color: #0B0D1B;
+            --card-bg: rgba(20, 24, 48, 0.9);
+            --card-border: rgba(120, 140, 255, 0.3);
+            --accent-glow: #7B61FF;
+            --neon-blue: #00F0FF;
+            --neon-green: #10B981;
+            --neon-gold: #F59E0B;
+            --text-main: #E2E8F0;
+            --text-sub: #94A3B8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: radial-gradient(ellipse at bottom, #111827 0%, #050714 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Background Vũ Trụ */
+        .stars {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background: 
+                radial-gradient(2px 2px at 35px 45px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 80px 110px, #7B61FF, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 130px 60px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 200px 160px, #00F0FF, rgba(0,0,0,0));
+            background-size: 250px 250px;
+            opacity: 0.7;
+        }
+
+        .container {
+            max-width: 950px;
+            width: 100%;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 22px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(123, 97, 255, 0.2);
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            color: #FFF;
+            text-shadow: 0 0 12px var(--accent-glow);
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: var(--neon-blue);
+            font-size: 0.95rem;
+        }
+
+        /* Switch Tabs */
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--accent-glow);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px var(--accent-glow);
+            color: #FFF;
+        }
+
+        /* Study Cards */
+        .text-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: 0.2s;
+        }
+
+        .text-card:hover {
+            border-color: var(--neon-blue);
+        }
+
+        .hanzi-text {
+            font-size: 1.6rem;
+            color: #FFF;
+            margin-bottom: 10px;
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 8px rgba(255,255,255,0.3);
+        }
+
+        .pinyin-text {
+            font-size: 1.1rem;
+            color: var(--neon-gold);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .translation-text {
+            font-size: 1.05rem;
+            color: var(--neon-blue);
+            line-height: 1.5;
+            background: rgba(10, 14, 30, 0.6);
+            padding: 14px 16px;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-glow);
+        }
+
+        /* Interactive Practice Cards */
+        .practice-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hidden-answer {
+            filter: blur(6px);
+            user-select: none;
+            cursor: pointer;
+            transition: 0.3s;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 12px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-top: 8px;
+            color: var(--neon-blue);
+        }
+
+        .hidden-answer.revealed {
+            filter: blur(0);
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid var(--neon-green);
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: var(--text-sub);
+            font-size: 0.85rem;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+
+    <div class="container">
+        <header>
+            <h1>HÁN CỔ - ÔN TẬP GIỮA KỲ IV</h1>
+            <p>Trang 16: Phiên Âm & Dịch Nghĩa (Đoạn 4 - 10: Thăng Long & Sám Hối)</p>
+        </header>
+
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchSection('study')">📚 Phần 1: Tự Học & Dịch Nghĩa</button>
+            <button class="tab-btn" onclick="switchSection('practice')">✍️ Phần 2: Thực Hành Tự Dịch</button>
+        </div>
+
+        <!-- PHẦN 1: TỰ HỌC & DỊCH NGHĨA -->
+        <div id="studySection">
+            <!-- Đoạn 4 -->
+            <div class="text-card">
+                <div style="color: var(--neon-gold); font-weight: bold; margin-bottom: 6px;">Đoạn 4: Lịch Sử Thăng Long (Giai đoạn cổ đại)</div>
+                <div class="hanzi-text">4. 昇龍城昔號龍编地。上古有人居焉。</div>
+                <div class="pinyin-text">Phiên âm: Thăng Long thành tích hiệu Long Biên địa. Thượng cổ hữu nhân cư yên.</div>
+                <div class="translation-text">
+                    <b>Dịch nghĩa:</b> Thành Thăng Long ngày xưa gọi là đất Long Biên. Từ đời thượng cổ đã có người ở nơi đó.
+                </div>
+            </div>
+
+            <!-- Đoạn 5 -->
+            <div class="text-card">
+                <div style="color: var(--neon-gold); font-weight: bold; margin-bottom: 6px;">Đoạn 5: Vua Lý Thái Tổ dời đô</div>
+                <div class="hanzi-text">5. 至李太祖泛舟珥河津，有雙龍引船，因名昇龍。</div>
+                <div class="pinyin-text">Phiên âm: Chí Lý Thái Tổ phiếm chu Nhĩ Hà tân, hữu song long dẫn thuyền, nhân danh Thăng Long.</div>
+                <div class="translation-text">
+                    <b>Dịch nghĩa:</b> Đến đời vua Lý Thái Tổ dong thuyền ở bến sông Nhĩ Hà, có hai con rồng (hiện lên) dẫn thuyền, nhân đó đặt tên là Thăng Long.
+                </div>
+            </div>
+
+            <!-- Đoạn 6 -->
+            <div class="text-card">
+                <div style="color: var(--neon-gold); font-weight: bold; margin-bottom: 6px;">Đoạn 6: Đóng đô Thăng Long</div>
+                <div class="hanzi-text">6. 有雙龍引船，因名昇龍，而都之，即今之京城也。</div>
+                <div class="pinyin-text">Phiên âm: Hữu song long dẫn thuyền, nhân danh Thăng Long, nhi đô chi, tức kim chi kinh thành dã.</div>
+                <div class="translation-text">
+                    <b>Dịch nghĩa:</b> Có hai con rồng (hiện lên) dẫn thuyền, nhân đó đặt tên là Thăng Long, mà đóng đô nơi ấy, tức là kinh đô hiện nay vậy.
+                </div>
+            </div>
+
+            <!-- Đoạn 7 -->
+            <div class="text-card">
+                <div style="color: var(--neon-gold); font-weight: bold; margin-bottom: 6px;">Đoạn 7: Ý nghĩa chữ Sám Hối</div>
+                <div class="hanzi-text">7. 梵語懺摩，華言悔過。自知往昔所造惡業，實不當作。</div>
+                <div class="pinyin-text">Phiên âm: Phạm ngữ sám ma, Hoa ngôn hối quá. Tự tri vãng tích sở tạo ác nghiệp, thật bất đương tác.</div>
+                <div class="translation-text">
+                    <b>Dịch nghĩa:</b> Sám hối, theo tiếng Ấn Độ (Phạn ngữ) là "Sám-ma". Tiếng Trung Hoa dịch là: "Hối quá". Nghĩa là chính mình tự biết những nghiệp ác đã lỡ gây ra từ trước, thật không đáng làm!
+                </div>
+            </div>
+
+            <!-- Đoạn 8 -->
+            <div class="text-card">
+                <div style="color: var(--neon-gold); font-weight: bold; margin-bottom: 6px;">Đoạn 8: Sinh lòng hổ thẹn</div>
+                <div class="hanzi-text">8. 自知往昔所造惡業，實不當作，生大慚愧。</div>
+                <div class="pinyin-text">Phiên âm: Tự tri vãng tích sở tạo ác nghiệp, thật bất đương tác, sanh đại tàm quý.</div>
+                <div class="translation-text">
+                    <b>Dịch nghĩa:</b> Nghĩa là chính mình tự biết những nghiệp ác đã lỡ gây ra từ trước, thật không đáng làm! Mà sinh lòng biết hổ thẹn sâu sắc.
+                </div>
+            </div>
+
+            <!-- Đoạn 9 -->
+            <div class="text-card">
+                <div style="color: var(--neon-gold); font-weight: bold; margin-bottom: 6px;">Đoạn 9: Nghi thức Sám Hối trước Phật</div>
+                <div class="hanzi-text">9. 故今澡浴身心，向佛前焚香禮拜，發露懺悔。</div>
+                <div class="pinyin-text">Phiên âm: Cố kim tháo dục thân tâm, hướng Phật tiền phần hương lễ bái, phát lộ sám hối.</div>
+                <div class="translation-text">
+                    <b>Dịch nghĩa:</b> Cho nên ngày nay ta tắm gội thân tâm sạch sẽ, rồi đến trước đài Phật, đốt nén hương trầm, một lòng thành kính lễ bái, tỏ bày các tội lỗi, cầu xin sám hối.
+                </div>
+            </div>
+
+            <!-- Đoạn 10 -->
+            <div class="text-card">
+                <div style="color: var(--neon-gold); font-weight: bold; margin-bottom: 6px;">Đoạn 10: Phát nguyện giữ giới</div>
+                <div class="hanzi-text">10. 復立誓曰：「自今以後，寧啖熱鐵猛火，終不犯戒，作諸惡事。」</div>
+                <div class="pinyin-text">Phiên âm: Phục lập thệ viết: “Tự kim dĩ hậu, ninh đạm nhiệt thiết mãnh hỏa, chung bất phạm giới, tác chư ác sự.”</div>
+                <div class="translation-text">
+                    <b>Dịch nghĩa:</b> Lại lập lời thệ nguyện như vầy: Từ nay về sau, con thà nuốt hoàn sắt nóng và cục lửa to, chớ quyết không còn phạm giới của Phật, mà làm các việc ác nữa!
+                </div>
+            </div>
+        </div>
+
+        <!-- PHẦN 2: THỰC HÀNH TỰ DỊCH -->
+        <div id="practiceSection" style="display: none;">
+            <div style="margin-bottom: 20px; text-align: center; color: var(--text-sub);">
+                💡 <i>Bấm vào ô mờ bên dưới để hiện đáp án dịch nghĩa khi bạn đã tự nhẩm xong.</i>
+            </div>
+
+            <div class="practice-card">
+                <div class="hanzi-text">4. 昇龍城昔號龍编地。上古有人居焉。</div>
+                <div class="pinyin-text">Phiên âm: Thăng Long thành tích hiệu Long Biên địa...</div>
+                <div><b>Bấm để xem dịch nghĩa:</b></div>
+                <div class="hidden-answer" onclick="revealAnswer(this)">Thành Thăng Long xưa gọi là đất Long Biên. Từ thượng cổ đã có người ở đó.</div>
+            </div>
+
+            <div class="practice-card">
+                <div class="hanzi-text">5. 至李太祖泛舟珥河津，有雙龍引船，因名昇龍。</div>
+                <div class="pinyin-text">Phiên âm: Chí Lý Thái Tổ phiếm chu Nhĩ Hà tân...</div>
+                <div><b>Bấm để xem dịch nghĩa:</b></div>
+                <div class="hidden-answer" onclick="revealAnswer(this)">Đến đời vua Lý Thái Tổ dong thuyền bến Nhĩ Hà, có hai con rồng dẫn thuyền, nhân đó đặt tên Thăng Long.</div>
+            </div>
+
+            <div class="practice-card">
+                <div class="hanzi-text">6. 有雙龍引船，因名昇龍，而都之，即今之京城也。</div>
+                <div class="pinyin-text">Phiên âm: Hữu song long dẫn thuyền... tức kim chi kinh thành dã.</div>
+                <div><b>Bấm để xem dịch nghĩa:</b></div>
+                <div class="hidden-answer" onclick="revealAnswer(this)">Có hai con rồng dẫn thuyền, nhân đó tên Thăng Long, mà đóng đô ở đấy, tức là kinh thành ngày nay vậy.</div>
+            </div>
+
+            <div class="practice-card">
+                <div class="hanzi-text">7. 梵語懺摩，華言悔過。自知往昔所造惡業，實不當作。</div>
+                <div class="pinyin-text">Phiên âm: Phạm ngữ sám ma, Hoa ngôn hối quá...</div>
+                <div><b>Bấm để xem dịch nghĩa:</b></div>
+                <div class="hidden-answer" onclick="revealAnswer(this)">Tiếng Phạn là Sám-ma, tiếng Trung Hoa dịch là Hối quá. Tự biết nghiệp ác xưa gây ra thật không đáng làm.</div>
+            </div>
+
+            <div class="practice-card">
+                <div class="hanzi-text">8. 自知往昔所造惡業，實不當作，生大慚愧。</div>
+                <div class="pinyin-text">Phiên âm: Tự tri vãng tích sở tạo ác nghiệp... sanh đại tàm quý.</div>
+                <div><b>Bấm để xem dịch nghĩa:</b></div>
+                <div class="hidden-answer" onclick="revealAnswer(this)">Tự biết nghiệp ác xưa gây ra thật không đáng làm, mà sinh lòng biết hổ thẹn.</div>
+            </div>
+
+            <div class="practice-card">
+                <div class="hanzi-text">9. 故今澡浴身心，向佛前焚香禮拜，發露懺悔。</div>
+                <div class="pinyin-text">Phiên âm: Cố kim tháo dục thân tâm... phát lộ sám hối.</div>
+                <div><b>Bấm để xem dịch nghĩa:</b></div>
+                <div class="hidden-answer" onclick="revealAnswer(this)">Cho nên nay tắm gội thân tâm, trước đài Phật dâng hương lễ bái, tỏ bày sám hối.</div>
+            </div>
+
+            <div class="practice-card">
+                <div class="hanzi-text">10. 復立誓曰：「自今以後，寧啖熱鐵猛火，終不犯戒，作諸惡事。」</div>
+                <div class="pinyin-text">Phiên âm: Phục lập thệ viết: “Tự kim dĩ hậu... chung bất phạm giới...”</div>
+                <div><b>Bấm để xem dịch nghĩa:</b></div>
+                <div class="hidden-answer" onclick="revealAnswer(this)">Lại thề rằng: Từ nay về sau, thà nuốt sắt nóng lửa to, quyết không phạm giới làm việc ác nữa!</div>
+            </div>
+        </div>
+
+        <footer>
+            Chương trình Học & Ôn tập Hán Cổ • Thiết kế Tương tác Vũ trụ 🌌
+        </footer>
+    </div>
+
+    <script>
+        function switchSection(section) {
+            document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+            if (section === 'study') {
+                document.querySelectorAll(".tab-btn")[0].classList.add("active");
+                document.getElementById("studySection").style.display = "block";
+                document.getElementById("practiceSection").style.display = "none";
+            } else {
+                document.querySelectorAll(".tab-btn")[1].classList.add("active");
+                document.getElementById("studySection").style.display = "none";
+                document.getElementById("practiceSection").style.display = "block";
+            }
+        }
+
+        function revealAnswer(element) {
+            element.classList.toggle("revealed");
+        }
+    </script>
+</body>
+</html>

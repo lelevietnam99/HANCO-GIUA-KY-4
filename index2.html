@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ôn Tập Hán Cổ - Trang 2: Từ Vựng (Chứng - Đồng)</title>
+    <style>
+        :root {
+            --bg-color: #0B0D1B;
+            --card-bg: rgba(20, 24, 48, 0.9);
+            --card-border: rgba(120, 140, 255, 0.3);
+            --accent-glow: #7B61FF;
+            --neon-blue: #00F0FF;
+            --neon-purple: #D000FF;
+            --text-main: #E2E8F0;
+            --text-sub: #94A3B8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: radial-gradient(ellipse at bottom, #111827 0%, #050714 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background: 
+                radial-gradient(2px 2px at 20px 30px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 50px 80px, #D000FF, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 100px 40px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 170px 130px, #00F0FF, rgba(0,0,0,0));
+            background-size: 220px 220px;
+            opacity: 0.65;
+        }
+
+        .container {
+            max-width: 950px;
+            width: 100%;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(123, 97, 255, 0.2);
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            color: #FFF;
+            text-shadow: 0 0 12px var(--accent-glow);
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: var(--neon-blue);
+            font-size: 0.95rem;
+        }
+
+        .controls-panel {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 10px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--accent-glow);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 12px var(--accent-glow);
+            color: #FFF;
+        }
+
+        .search-box {
+            position: relative;
+            flex-grow: 1;
+            max-width: 320px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--card-border);
+            background: rgba(10, 14, 30, 0.8);
+            color: #FFF;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .search-box input:focus {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        /* Flashcard Section */
+        .card-view {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .flashcard {
+            width: 380px;
+            height: 260px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .flashcard-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s ease;
+            transform-style: preserve-3d;
+            border-radius: 16px;
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.2);
+        }
+
+        .flashcard.flipped .flashcard-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            border-radius: 16px;
+            background: var(--card-bg);
+            border: 1px solid var(--neon-blue);
+        }
+
+        .card-front {
+            font-size: 4.5rem;
+            color: #FFF;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+        }
+
+        .card-front span.hint {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            margin-top: 12px;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+            background: rgba(12, 17, 38, 0.98);
+            text-align: left;
+            align-items: flex-start;
+            justify-content: flex-start;
+            overflow-y: auto;
+        }
+
+        .card-back .pinyin {
+            font-size: 1.3rem;
+            color: var(--neon-blue);
+            font-weight: bold;
+            margin-bottom: 8px;
+            border-bottom: 1px solid var(--card-border);
+            width: 100%;
+            padding-bottom: 6px;
+            text-shadow: 0 0 8px var(--neon-blue);
+        }
+
+        .card-back .details {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            line-height: 1.5;
+        }
+
+        .card-nav {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .action-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--card-border);
+            color: #FFF;
+            padding: 8px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .action-btn:hover {
+            background: var(--accent-glow);
+            border-color: var(--accent-glow);
+        }
+
+        /* List View */
+        .list-view {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .vocab-row {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 15px;
+            display: grid;
+            grid-template-columns: 90px 150px 1fr;
+            gap: 15px;
+            align-items: center;
+            transition: 0.2s;
+        }
+
+        .vocab-row:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 4px 15px rgba(0, 240, 255, 0.15);
+        }
+
+        .list-hanzi {
+            font-size: 2rem;
+            color: #FFF;
+            text-align: center;
+        }
+
+        .list-meaning {
+            font-size: 1.1rem;
+            color: var(--neon-blue);
+            font-weight: 600;
+        }
+
+        .list-explanation {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            line-height: 1.4;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: var(--text-sub);
+            font-size: 0.85rem;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+
+    <div class="container">
+        <header>
+            <h1>HÁN CỔ - ÔN TẬP GIỮA KỲ IV</h1>
+            <p>Trang 2: Phân Tích Từ Vựng & Bộ Thủ (Chứng - Đồng)</p>
+        </header>
+
+        <div class="controls-panel">
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('cards')">🃏 Thẻ Ghi Nhớ (Flashcard)</button>
+                <button class="tab-btn" onclick="switchTab('list')">📋 Danh Sách Chi Tiết</button>
+            </div>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Tìm Chữ Hán hoặc Nghĩa..." oninput="handleSearch()">
+            </div>
+        </div>
+
+        <!-- Flashcard Section -->
+        <div id="cardsSection" class="card-view">
+            <div class="flashcard" id="flashcard" onclick="flipCard()">
+                <div class="flashcard-inner">
+                    <div class="card-front">
+                        <span id="cardHanzi">證書</span>
+                        <span class="hint">(Nhấn để lật xem nghĩa & phân tích)</span>
+                    </div>
+                    <div class="card-back">
+                        <div class="pinyin" id="cardMeaning">Phiên âm: chứng thư</div>
+                        <div class="details" id="cardDetails">Chi tiết bộ thủ và ý nghĩa...</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-nav">
+                <button class="action-btn" onclick="prevCard(event)">⬅️ Trước</button>
+                <span id="cardProgress" style="color: var(--neon-blue); font-weight: bold;">1 / 25</span>
+                <button class="action-btn" onclick="nextCard(event)">Sau ➡️</button>
+                <button class="action-btn" onclick="randomCard(event)">🔀 Ngẫu nhiên</button>
+            </div>
+        </div>
+
+        <!-- List Section -->
+        <div id="listSection" style="display: none;">
+            <div class="list-view" id="vocabList"></div>
+        </div>
+
+        <footer>
+            Học tập hiệu quả • Vũ trụ Tri thức Hán Cổ 🌌
+        </footer>
+    </div>
+
+    <script>
+        const vocabData = [
+            { hanzi: "證書", meaning: "chứng thư", components: "Bộ Ngôn (言) + Bộ Thư (書)", explanation: "Chữ 證 (bộ Ngôn - lời nói, chứng minh) + 書 (bộ Viết/Thư - văn bản). Tờ giấy, văn bản chứng nhận sự thật hoặc bằng cấp." },
+            { hanzi: "種子", meaning: "chủng tử", components: "Bộ Hòa (禾) + Bộ Tử (子)", explanation: "Chủng (hạt giống) + Tử (con, hạt). Trong Duy Thức Học Phật Giáo, 'Chủng tử' chỉ những mầm mống nghiệp thức lưu giữ trong A-lại-da thức." },
+            { hanzi: "公安", meaning: "công an", components: "Bộ Công (公) + Bộ Miên/An (安)", explanation: "Công (chung, công cộng) + An (yên ổn). Sự yên ổn chung cho xã hội và cộng đồng." },
+            { hanzi: "公平", meaning: "công bình", components: "Bộ Công (公) + Bộ Bình (平)", explanation: "Công (không thiên vị) + Bình (bằng phẳng). Xử lý sự việc bình đẳng, ngay thẳng." },
+            { hanzi: "公正", meaning: "công chánh", components: "Bộ Công (公) + Bộ Chính (正)", explanation: "Công tâm và chính trực, không vì lợi ích cá nhân mà làm sai lệch sự thật." },
+            { hanzi: "公主", meaning: "công chủ", components: "Bộ Công (公) + Bộ Chủ (主)", explanation: "Tên gọi con gái của vua chúa thời xưa." },
+            { hanzi: "共同", meaning: "cộng đồng", components: "Bộ Cộng (共) + Bộ Đồng (同)", explanation: "Cùng nhau làm việc, sống chung trong một tập thể hoặc mục đích." },
+            { hanzi: "共和", meaning: "cộng hoà", components: "Bộ Cộng (共) + Bộ Hòa (和)", explanation: "Hòa hợp cùng nhau. Thể chế chính trị vì lợi ích chung của toàn dân." },
+            { hanzi: "共產", meaning: "cộng sản", components: "Bộ Cộng (共) + Bộ Sản (産)", explanation: "Sản nghiệp, tài sản thuộc sở hữu chung của cộng đồng." },
+            { hanzi: "恭敬", meaning: "cung kính", components: "Bộ Tâm (心/忄) + Bộ Phao (攵)", explanation: "Lòng kính trọng sâu sắc, khiêm nhường thể hiện qua thái độ và tâm thành." },
+            { hanzi: "狂風", meaning: "cuồng phong", components: "Bộ Khuyển (犭) + Bộ Phong (風)", explanation: "Cơn gió dữ dội, cuồng nhiệt như mất kiểm soát." },
+            { hanzi: "救助", meaning: "cứu trợ", components: "Bộ Phác (攵) + Bộ Lực (力)", explanation: "Ra tay giang rộng sức lực giúp đỡ người khác trong lúc hoạn nạn." },
+            { hanzi: "夜光", meaning: "dạ quang", components: "Bộ Tịch (夕) + Bộ Quang (光)", explanation: "Ánh sáng phát ra rực rỡ lung linh trong đêm tối." },
+            { hanzi: "多情", meaning: "đa tình", components: "Bộ Đa (多) + Bộ Tình (情)", explanation: "Giàu tình cảm, tâm hồn nhạy cảm, nhiều vương vấn duyên nợ." },
+            { hanzi: "臺北", meaning: "Đài Bắc", components: "Bộ Đài (臺) + Bộ Bắc (北)", explanation: "Thành phố Đài Bắc (Đài Loan)." },
+            { hanzi: "大志", meaning: "đại chí", components: "Bộ Đại (大) + Bộ Chí (志)", explanation: "Hoài vọng lớn lao, chí hướng vĩ đại hướng tới điều cao đẹp." },
+            { hanzi: "大眾", meaning: "đại chúng", components: "Bộ Đại (大) + Bộ Chúng (眾)", explanation: "Số đông mọi người, quần chúng đông đảo." },
+            { hanzi: "大道", meaning: "đại đạo", components: "Bộ Đại (大) + Bộ Đạo (道)", explanation: "Con đường lớn rộng mở, chân lý tối cao vĩ đại của vũ trụ." },
+            { hanzi: "大同", meaning: "đại đồng", components: "Bộ Đại (大) + Bộ Đồng (同)", explanation: "Thế giới lý tưởng nơi mọi người hòa hợp, không còn phân biệt giai cấp hay ranh giới." },
+            { hanzi: "大德", meaning: "đại đức", components: "Bộ Đại (大) + Bộ Đức (德)", explanation: "Người có đạo đức cao vinh; xưng hằng danh kính trọng dành cho các bậc chư Tăng." },
+            { hanzi: "大乘", meaning: "đại thừa", components: "Bộ Đại (大) + Bộ Thừa (乘 - cỗ xe)", explanation: "Cỗ xe lớn chuyên chở muôn vàn chúng sinh đến bến bờ giải thoát (Phật giáo Đại Thừa)." },
+            { hanzi: "登樓", meaning: "đăng lâu", components: "Bộ Đăng (登) + Bộ Lâu (樓)", explanation: "Bước lên tầng lầu cao để mở rộng tầm mắt quan sát." },
+            { hanzi: "登山", meaning: "đăng sơn", components: "Bộ Đăng (登) + Bộ Sơn (山)", explanation: "Trèo lên núi cao, vượt qua mọi vất vả chông gai." },
+            { hanzi: "同心", meaning: "đồng tâm", components: "Bộ Đồng (同) + Bộ Tâm (心)", explanation: "Cùng chung một lòng, đoàn kết nhất trí hướng về một mục tiêu." },
+            { hanzi: "同情", meaning: "đồng tình", components: "Bộ Đồng (同) + Bộ Tình (情)", explanation: "Sự thấu hiểu, cảm thông và sẻ chia nỗi đau với hoàn cảnh người khác." }
+        ];
+
+        let currentIndex = 0;
+        let filteredData = [...vocabData];
+
+        function updateCardView() {
+            if (filteredData.length === 0) return;
+            const item = filteredData[currentIndex];
+            document.getElementById("cardHanzi").innerText = item.hanzi;
+            document.getElementById("cardMeaning").innerText = `Phiên âm: ${item.meaning}`;
+            document.getElementById("cardDetails").innerHTML = `<b>Cấu tạo bộ thủ:</b> ${item.components}<br><br><b>Ý nghĩa sâu xa:</b> ${item.explanation}`;
+            document.getElementById("cardProgress").innerText = `${currentIndex + 1} / ${filteredData.length}`;
+            document.getElementById("flashcard").classList.remove("flipped");
+        }
+
+        function flipCard() {
+            document.getElementById("flashcard").classList.toggle("flipped");
+        }
+
+        function nextCard(event) {
+            if(event) event.stopPropagation();
+            if (currentIndex < filteredData.length - 1) {
+                currentIndex++;
+                updateCardView();
+            }
+        }
+
+        function prevCard(event) {
+            if(event) event.stopPropagation();
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCardView();
+            }
+        }
+
+        function randomCard(event) {
+            if(event) event.stopPropagation();
+            currentIndex = Math.floor(Math.random() * filteredData.length);
+            updateCardView();
+        }
+
+        function renderList() {
+            const listContainer = document.getElementById("vocabList");
+            listContainer.innerHTML = "";
+            filteredData.forEach((item) => {
+                const div = document.createElement("div");
+                div.className = "vocab-row";
+                div.innerHTML = `
+                    <div class="list-hanzi">${item.hanzi}</div>
+                    <div class="list-meaning">${item.meaning}</div>
+                    <div class="list-explanation"><b>Bộ cấu thành:</b> ${item.components}<br><b>Ý nghĩa:</b> ${item.explanation}</div>
+                `;
+                listContainer.appendChild(div);
+            });
+        }
+
+        function switchTab(tab) {
+            document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+            if (tab === 'cards') {
+                document.querySelectorAll(".tab-btn")[0].classList.add("active");
+                document.getElementById("cardsSection").style.display = "flex";
+                document.getElementById("listSection").style.display = "none";
+            } else {
+                document.querySelectorAll(".tab-btn")[1].classList.add("active");
+                document.getElementById("cardsSection").style.display = "none";
+                document.getElementById("listSection").style.display = "block";
+                renderList();
+            }
+        }
+
+        function handleSearch() {
+            const query = document.getElementById("searchInput").value.toLowerCase().trim();
+            filteredData = vocabData.filter(item => 
+                item.hanzi.includes(query) || item.meaning.toLowerCase().includes(query) || item.explanation.toLowerCase().includes(query)
+            );
+            currentIndex = 0;
+            updateCardView();
+            renderList();
+        }
+
+        updateCardView();
+    </script>
+</body>
+</html>

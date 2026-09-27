@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ôn Tập Hán Cổ - Trang 18: Từ Âm Hán Việt Viết Chữ Hán & Dịch Nghĩa (Câu 1 - 6)</title>
+    <style>
+        :root {
+            --bg-color: #0B0D1B;
+            --card-bg: rgba(20, 24, 48, 0.9);
+            --card-border: rgba(120, 140, 255, 0.3);
+            --accent-glow: #7B61FF;
+            --neon-blue: #00F0FF;
+            --neon-green: #10B981;
+            --neon-gold: #F59E0B;
+            --text-main: #E2E8F0;
+            --text-sub: #94A3B8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: radial-gradient(ellipse at bottom, #111827 0%, #050714 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Background Vũ Trụ */
+        .stars {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background: 
+                radial-gradient(2px 2px at 35px 45px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 80px 110px, #7B61FF, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 130px 60px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 200px 160px, #00F0FF, rgba(0,0,0,0));
+            background-size: 250px 250px;
+            opacity: 0.7;
+        }
+
+        .container {
+            max-width: 950px;
+            width: 100%;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 22px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(123, 97, 255, 0.2);
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            color: #FFF;
+            text-shadow: 0 0 12px var(--accent-glow);
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: var(--neon-blue);
+            font-size: 0.95rem;
+        }
+
+        /* Switch Tabs */
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--accent-glow);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px var(--accent-glow);
+            color: #FFF;
+        }
+
+        /* Study Cards */
+        .text-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: 0.2s;
+        }
+
+        .text-card:hover {
+            border-color: var(--neon-blue);
+        }
+
+        .hanzi-text {
+            font-size: 1.6rem;
+            color: #FFF;
+            margin-bottom: 10px;
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 8px rgba(255,255,255,0.3);
+        }
+
+        .pinyin-text {
+            font-size: 1.15rem;
+            color: var(--neon-gold);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .translation-text {
+            font-size: 1.05rem;
+            color: var(--neon-blue);
+            line-height: 1.5;
+            background: rgba(10, 14, 30, 0.6);
+            padding: 14px 16px;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-glow);
+        }
+
+        /* Interactive Practice Cards */
+        .practice-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hidden-answer {
+            filter: blur(6px);
+            user-select: none;
+            cursor: pointer;
+            transition: 0.3s;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 12px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-top: 8px;
+            color: #FFF;
+            font-size: 1.3rem;
+        }
+
+        .hidden-answer.revealed {
+            filter: blur(0);
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid var(--neon-green);
+            color: var(--neon-blue);
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: var(--text-sub);
+            font-size: 0.85rem;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+
+    <div class="container">
+        <header>
+            <h1>HÁN CỔ - ÔN TẬP GIỮA KỲ IV</h1>
+            <p>Trang 18: Từ Âm Hán Việt Viết Chữ Hán & Dịch Nghĩa (Câu 1 đến Câu 6)</p>
+        </header>
+
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchSection('study')">📚 Phần 1: Tự Học & Tra Cứu</button>
+            <button class="tab-btn" onclick="switchSection('practice')">✍️ Phần 2: Luyện Viết & Tự Dịch</button>
+        </div>
+
+        <!-- PHẦN 1: TỰ HỌC & TRA CỨU -->
+        <div id="studySection">
+            <div class="text-card">
+                <div style="color: var(--neon-gold); font-weight: bold; margin-bottom: 6px;">Câu 1</div>
+                <div class="pinyin-text">Phiên âm: Ngô đồng lưỡng chu, chi cao diệp đại.</div>
+                <div class="hanzi-text">Chữ Hán: 梧桐兩株，枝高葉大。</div>
+                <div class="translation-text"><b>Dịch nghĩa:</b> Hai cây ngô đồng, cành cao lá to.</div>
+            </div>
+
+            <div class="text-card">
+                <div style="color: var(--neon-gold); font-weight: bold; margin-bottom: 6px;">Câu 2</div>
+                <div class="pinyin-text">Phiên âm: Sương giáng hậu, diệp tiệm hoàng.</div>
+                <div class="hanzi-text">Chữ Hán: 霜降後，葉漸黃。</div>
+                <div class="translation-text"><b>Dịch nghĩa:</b> Sau mùa sương xuống, lá dần dần vàng.</div>
+            </div>
+
+            <div class="text-card">
+                <div style="color: var(--neon-gold); font-weight: bold; margin-bottom: 6px;">Câu 3</div>
+                <div class="pinyin-text">Phiên âm: Tây phong xuy lai, lạc diệp mãn giai.</div>
+                <div class="hanzi-text">Chữ Hán: 西風吹來，落葉滿階。</div>
+                <div class="translation-text"><b>Dịch nghĩa:</b> Gió tây thổi đến, lá rụng đầy thềm.</div>
+            </div>
+
+            <div class="text-card">
+                <div style="color: var(--neon-gold); font-weight: bold; margin-bottom: 6px;">Câu 4</div>
+                <div class="pinyin-text">Phiên âm: Xuân hạ thu đông, thị vi tứ quý.</div>
+                <div class="hanzi-text">Chữ Hán: 春夏秋冬，是為四季。</div>
+                <div class="translation-text"><b>Dịch nghĩa:</b> Xuân hạ thu đông, đó là bốn mùa.</div>
+            </div>
+
+            <div class="text-card">
+                <div style="color: var(--neon-gold); font-weight: bold; margin-bottom: 6px;">Câu 5</div>
+                <div class="pinyin-text">Phiên âm: Xuân khứ hạ lai, hạ khứ thu lai.</div>
+                <div class="hanzi-text">Chữ Hán: 春去夏來，夏去秋來。</div>
+                <div class="translation-text"><b>Dịch nghĩa:</b> Xuân đi, hạ lại, hạ đi thu đến.</div>
+            </div>
+
+            <div class="text-card">
+                <div style="color: var(--neon-gold); font-weight: bold; margin-bottom: 6px;">Câu 6</div>
+                <div class="pinyin-text">Phiên âm: Thu khứ đông lai, thiên khí các dị.</div>
+                <div class="hanzi-text">Chữ Hán: 秋去冬來，天氣各異。</div>
+                <div class="translation-text"><b>Dịch nghĩa:</b> Thu đi đông đến, tiết trời mỗi mùa mỗi khác.</div>
+            </div>
+        </div>
+
+        <!-- PHẦN 2: LUYỆN VIẾT CHỮ HÁN & TỰ DỊCH -->
+        <div id="practiceSection" style="display: none;">
+            <div style="margin-bottom: 20px; text-align: center; color: var(--text-sub);">
+                💡 <i>Dựa vào phiên âm, bạn hãy nhẩm viết chữ Hán và dịch nghĩa ra nháp, sau đó bấm vào ô mờ để xem đáp án.</i>
+            </div>
+
+            <div class="practice-card">
+                <div class="pinyin-text">1. Ngô đồng lưỡng chu, chi cao diệp đại.</div>
+                <div><b>Bấm để xem Chữ Hán & Dịch nghĩa:</b></div>
+                <div class="hidden-answer" onclick="revealAnswer(this)">梧桐兩株，枝高葉大。<br>(Hai cây ngô đồng, cành cao lá to.)</div>
+            </div>
+
+            <div class="practice-card">
+                <div class="pinyin-text">2. Sương giáng hậu, diệp tiệm hoàng.</div>
+                <div><b>Bấm để xem Chữ Hán & Dịch nghĩa:</b></div>
+                <div class="hidden-answer" onclick="revealAnswer(this)">霜降後，葉漸黃。<br>(Sau mùa sương xuống, lá dần dần vàng.)</div>
+            </div>
+
+            <div class="practice-card">
+                <div class="pinyin-text">3. Tây phong xuy lai, lạc diệp mãn giai.</div>
+                <div><b>Bấm để xem Chữ Hán & Dịch nghĩa:</b></div>
+                <div class="hidden-answer" onclick="revealAnswer(this)">西風吹來，落葉滿階。<br>(Gió tây thổi đến, lá rụng đầy thềm.)</div>
+            </div>
+
+            <div class="practice-card">
+                <div class="pinyin-text">4. Xuân hạ thu đông, thị vi tứ quý.</div>
+                <div><b>Bấm để xem Chữ Hán & Dịch nghĩa:</b></div>
+                <div class="hidden-answer" onclick="revealAnswer(this)">春夏秋冬，是為四季。<br>(Xuân hạ thu đông, đó là bốn mùa.)</div>
+            </div>
+
+            <div class="practice-card">
+                <div class="pinyin-text">5. Xuân khứ hạ lai, hạ khứ thu lai.</div>
+                <div><b>Bấm để xem Chữ Hán & Dịch nghĩa:</b></div>
+                <div class="hidden-answer" onclick="revealAnswer(this)">春去夏來，夏去秋來。<br>(Xuân đi, hạ lại, hạ đi thu đến.)</div>
+            </div>
+
+            <div class="practice-card">
+                <div class="pinyin-text">6. Thu khứ đông lai, thiên khí các dị.</div>
+                <div><b>Bấm để xem Chữ Hán & Dịch nghĩa:</b></div>
+                <div class="hidden-answer" onclick="revealAnswer(this)">秋去冬來，天氣各異。<br>(Thu đi đông đến, tiết trời mỗi mùa mỗi khác.)</div>
+            </div>
+        </div>
+
+        <footer>
+            Chương trình Học & Ôn tập Hán Cổ • Thiết kế Tương tác Vũ trụ 🌌
+        </footer>
+    </div>
+
+    <script>
+        function switchSection(section) {
+            document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+            if (section === 'study') {
+                document.querySelectorAll(".tab-btn")[0].classList.add("active");
+                document.getElementById("studySection").style.display = "block";
+                document.getElementById("practiceSection").style.display = "none";
+            } else {
+                document.querySelectorAll(".tab-btn")[1].classList.add("active");
+                document.getElementById("studySection").style.display = "none";
+                document.getElementById("practiceSection").style.display = "block";
+            }
+        }
+
+        function revealAnswer(element) {
+            element.classList.toggle("revealed");
+        }
+    </script>
+</body>
+</html>
